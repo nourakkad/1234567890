@@ -106,9 +106,14 @@ const Header = () => {
           <div className="col-12">
             <nav className="main-nav">
               {/* Mobile Menu Trigger - Left Side */}
-              <a className={`menu-trigger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+              <button
+                type="button"
+                className={`menu-trigger ${isMenuOpen ? 'active' : ''}`}
+                onClick={toggleMenu}
+                aria-label="Open menu"
+              >
                 <span>Menu</span>
-              </a>
+              </button>
               
               {/* Logo Start */}
               <a href="#top" className="logo" onClick={(e) => smoothScrollToSection(e, '#top')}>
