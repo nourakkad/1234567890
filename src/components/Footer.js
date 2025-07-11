@@ -77,7 +77,7 @@ const Footer = () => (
         <div className="row">
           <div className="col-lg-12">
             <p className="copyright text-center">
-              Copyright © 2025 <a href="#">Elyptek</a> . All Rights Reserved .
+              Copyright © 2025 <span className="footer-brand">Elyptek</span> . All Rights Reserved .
             </p>
           </div>
         </div>

@@ -99,10 +99,6 @@ const Header = () => {
     }
   };
 
-  const toggleLanguage = () => {
-    setCurrentLanguage(currentLanguage === 'EN' ? 'AR' : 'EN');
-  };
-
   return (
     <header className={`header-area header-sticky transparent-header wow slideInDown ${isScrolled ? 'show-header' : ''} ${isHeaderVisible ? 'header-visible' : 'header-hidden'}`} data-wow-duration="0.75s" data-wow-delay="0s">
       <div className="container">
