@@ -1,234 +1,264 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Portfolio = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const carouselRef = useRef(null);
-  
+  const trackRef = useRef(null);
+
   const portfolioItems = [
     {
       id: 1,
-      image: "assets/images/Tembix.png",
-      alt: "Timbex Client Project",
-      title: "Timbex",
-      description: "Composite Decking & Flooring Solutions",
-      socialLinks: [
-        { type: "instagram", url: "https://www.instagram.com/timbex_sy/", icon: "fab fa-instagram" },
-        { type: "facebook", url: "https://www.facebook.com/people/Timbex/61577931910672/", icon: "fab fa-facebook-f" },
-        { type: "website", url: "https://timbex-sy.com/", icon: "fas fa-globe" }
-      ]
+      title: "Damascus Gin",
+      category: "Branding",
+      image: "/assets/images/damascusgin.png",
+      instagram: "https://www.instagram.com/damascusgin/",
+      facebook: "https://www.facebook.com/damascusgin",
+      website: "https://damascusgin.com"
     },
     {
       id: 2,
-      image: "assets/images/Sabco.png",
-      alt: "Sabco Client Project",
-      title: "Sabco",
-      description: "Polystyrene Manufacturing & Thermal Insulation",
-      socialLinks: [
-        { type: "instagram", url: "https://www.instagram.com/sabco_for_eps", icon: "fab fa-instagram" },
-        { type: "facebook", url: "https://www.facebook.com/share/1CBaAvuV7k/", icon: "fab fa-facebook-f" },
-        { type: "website", url: "https://sabco.com.sy/", icon: "fas fa-globe" }
-      ]
+      title: "Tembix",
+      category: "Web Development",
+      image: "/assets/images/Tembix.png",
+      instagram: "https://www.instagram.com/tembix/",
+      facebook: "https://www.facebook.com/tembix",
+      website: "https://tembix.com"
     },
     {
       id: 3,
-      image: "assets/images/damascusgin.png",
-      alt: "Damascus Gin Client Project",
-      title: "Damascus Gin",
-      description: "Premium Craft Gin Distillery",
-      socialLinks: [
-        { type: "instagram", url: "https://www.instagram.com/damascus_gin?igsh=MTg1bDgwOGd5N2d0Nw==", icon: "fab fa-instagram" },
-        { type: "facebook", url: "https://www.facebook.com/share/16x6q2Tm9K/?mibextid=wwXIfr", icon: "fab fa-facebook-f" },
-        { type: "website", url: "http://damascusgin.com/", icon: "fas fa-globe" }
-      ]
+      title: "Sabco",
+      category: "Digital Marketing",
+      image: "/assets/images/Sabco.png",
+      instagram: "https://www.instagram.com/sabco/",
+      facebook: "https://www.facebook.com/sabco",
+      website: "https://sabco.com"
+    },
+    {
+      id: 4,
+      title: "Hcb",
+      category: "Software Development",
+      image: "/assets/images/hcb.jpg",
+      instagram: "https://www.instagram.com/hcb/",
+      facebook: "https://www.facebook.com/hcb",
+      website: "https://hcb.com"
+    },
+    {
+      id: 5,
+      title: "GD",
+      category: "Graphic Design",
+      image: "/assets/images/gd.png",
+      instagram: "https://www.instagram.com/gd/",
+      facebook: "https://www.facebook.com/gd",
+      website: "https://gd.com"
+    },
+    {
+      id: 6,
+      title: "SD",
+      category: "Software Development",
+      image: "/assets/images/sd.png",
+      instagram: "https://www.instagram.com/sd/",
+      facebook: "https://www.facebook.com/sd",
+      website: "https://sd.com"
     }
   ];
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
-  }, [portfolioItems.length]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
-  }, [portfolioItems.length]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  // Simple swipe handlers
-  const handleSwipeStart = useCallback((e) => {
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    setIsDragging(true);
-    setDragStart(clientX);
-    setDragOffset(0);
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 991);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleSwipeMove = useCallback((e) => {
-    if (!isDragging) return;
-    
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const offset = clientX - dragStart;
-    setDragOffset(offset);
-    
-    e.preventDefault();
-  }, [isDragging, dragStart]);
+  // Infinite loop logic
+  const totalItems = portfolioItems.length;
+  const actualIndex = currentIndex % totalItems;
 
-  const handleSwipeEnd = useCallback(() => {
-    if (!isDragging) return;
-    
+  const goToNext = () => {
+    setCurrentIndex(prev => prev + 1);
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex(prev => prev - 1);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  // Touch and mouse event handlers for mobile only
+  const handleTouchStart = (e) => {
+    if (!isMobile) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isMobile || !isDragging) return;
+    e.preventDefault();
+    setCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isMobile || !isDragging) return;
     setIsDragging(false);
-    setDragOffset(0);
     
+    const diff = startX - currentX;
     const threshold = 50;
     
-    if (Math.abs(dragOffset) > threshold) {
-      if (dragOffset > 0) {
-        prevSlide(); // Swipe right = previous
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        goToNext();
       } else {
-        nextSlide(); // Swipe left = next
+        goToPrev();
       }
     }
-  }, [isDragging, dragOffset, nextSlide, prevSlide]);
+  };
 
-  // Auto-advance slides every 5 seconds (only on desktop)
-  useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) return;
+  const handleMouseDown = (e) => {
+    if (!isMobile) return;
+    setIsDragging(true);
+    setStartX(e.clientX);
+    setCurrentX(e.clientX);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMobile || !isDragging) return;
+    setCurrentX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    if (!isMobile || !isDragging) return;
+    setIsDragging(false);
     
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+    const diff = startX - currentX;
+    const threshold = 50;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        goToNext();
+      } else {
+        goToPrev();
+      }
+    }
+  };
 
-  // Event listeners
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    // Mouse events for desktop
-    carousel.addEventListener('mousedown', handleSwipeStart);
-    carousel.addEventListener('mousemove', handleSwipeMove);
-    carousel.addEventListener('mouseup', handleSwipeEnd);
-    carousel.addEventListener('mouseleave', handleSwipeEnd);
-
-    // Touch events for mobile
-    carousel.addEventListener('touchstart', handleSwipeStart, { passive: false });
-    carousel.addEventListener('touchmove', handleSwipeMove, { passive: false });
-    carousel.addEventListener('touchend', handleSwipeEnd, { passive: true });
-
-    return () => {
-      carousel.removeEventListener('mousedown', handleSwipeStart);
-      carousel.removeEventListener('mousemove', handleSwipeMove);
-      carousel.removeEventListener('mouseup', handleSwipeEnd);
-      carousel.removeEventListener('mouseleave', handleSwipeEnd);
-      carousel.removeEventListener('touchstart', handleSwipeStart);
-      carousel.removeEventListener('touchmove', handleSwipeMove);
-      carousel.removeEventListener('touchend', handleSwipeEnd);
-    };
-  }, [handleSwipeStart, handleSwipeMove, handleSwipeEnd]);
-
-  // Calculate transform based on screen size
+  // Calculate transform for desktop vs mobile
   const getTransform = () => {
-    const isMobile = window.innerWidth <= 768;
     if (isMobile) {
-      // Mobile: move by 100% (one card at a time)
-      return `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))`;
+      return `translateX(-${actualIndex * 100}%)`;
     } else {
-      // Desktop: move by 33.333% (one card at a time when showing 3 cards)
-      return `translateX(calc(-${currentSlide * 33.333}% + ${dragOffset}px))`;
+      return `translateX(-${actualIndex * 33.333}%)`;
     }
   };
 
   return (
-    <>
-      <div className="section-divider">
-        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:'block',width:'100%',height:'60px'}}>
-          <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
-        </svg>
-      </div>
-      <div id="portfolio" className="our-portfolio section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5">
-              <div className="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-                <h6>Our Portfolio</h6>
-                <h4>Client <em>Projects</em></h4>
-                <div className="line-dec"></div>
-                <p>Explore our successful client projects that showcase our expertise in delivering innovative solutions across various industries and technologies.</p>
-              </div>
+    <div id="portfolio" className="our-portfolio">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="section-heading">
+              <h6>Our Portfolio</h6>
+              <h4>Check Out Some of Our Recent Work</h4>
+              <p>Discover our latest projects showcasing innovative design and development solutions across various industries.</p>
             </div>
           </div>
         </div>
-        <div className="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
-          <div className="row">
-            <div className="col-lg-12">
-              <div 
-                className="custom-carousel"
-                ref={carouselRef}
-                style={{ touchAction: 'pan-y' }}
-              >
-                <div className="carousel-container">
-                  <div 
-                    className="carousel-track" 
-                    style={{ 
-                      transform: getTransform(),
-                      transition: isDragging ? 'none' : 'transform 0.3s ease-out'
-                    }}
-                  >
-                    {portfolioItems.map((item, index) => (
-                      <div key={`${item.id}-${index}`} className="carousel-slide">
-                        <div className="portfolio-item">
-                          <div className="thumb">
-                            <img src={item.image} alt={item.alt} />
-                            <div className="portfolio-overlay">
-                              <div className="overlay-content">
-                                <i className="fa fa-eye"></i>
-                              </div>
-                            </div>
+        
+        <div className="custom-carousel" ref={carouselRef}>
+          <div className="carousel-container">
+            <div 
+              className="carousel-track"
+              ref={trackRef}
+              style={{
+                transform: getTransform(),
+                transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+              }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
+              {portfolioItems.map((item, index) => (
+                <div key={item.id} className="carousel-slide">
+                  <div className="portfolio-item-wrapper">
+                    <div className="portfolio-item">
+                      <div className="thumb">
+                        <img src={item.image} alt={item.title} />
+                        <div className="portfolio-overlay">
+                          <div className="overlay-content">
+                            <i className="fa fa-eye"></i>
                           </div>
-                          <div className="down-content">
-                            <h4>{item.title}</h4>
-                            <span>{item.description}</span>
-                          </div>
-                        </div>
-                        <div className="portfolio-social-buttons">
-                          {item.socialLinks.map((link, linkIndex) => (
-                            <a 
-                              key={linkIndex}
-                              href={link.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className={`social-btn ${link.type}-btn`}
-                            >
-                              <i className={link.icon}></i>
-                            </a>
-                          ))}
                         </div>
                       </div>
-                    ))}
+                      <div className="down-content">
+                        <h4>{item.title}</h4>
+                        <span>{item.category}</span>
+                      </div>
+                      <div className="portfolio-social-buttons">
+                        <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn">
+                          <i className="fab fa-instagram"></i>
+                        </a>
+                        <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn">
+                          <i className="fab fa-facebook"></i>
+                        </a>
+                        <a href={item.website} target="_blank" rel="noopener noreferrer" className="social-btn website-btn">
+                          <i className="fas fa-globe"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                
-                {/* Dots Indicator */}
-                <div className="carousel-dots">
-                  {portfolioItems.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
-                      onClick={() => goToSlide(index)}
-                    ></button>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
+
+          {/* Desktop Navigation Buttons */}
+          {!isMobile && (
+            <>
+              <button 
+                className="carousel-nav carousel-prev" 
+                onClick={goToPrev}
+                aria-label="Previous slide"
+              >
+                <i className="fas fa-chevron-left"></i>
+              </button>
+              <button 
+                className="carousel-nav carousel-next" 
+                onClick={goToNext}
+                aria-label="Next slide"
+              >
+                <i className="fas fa-chevron-right"></i>
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Carousel Dots */}
+        <div className="carousel-dots">
+          {portfolioItems.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${index === actualIndex ? 'active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
