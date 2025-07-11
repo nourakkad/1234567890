@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Portfolio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,9 +42,9 @@ const Portfolio = () => {
     }
   ];
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
-  };
+  }, [portfolioItems.length]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
@@ -60,7 +60,7 @@ const Portfolio = () => {
       nextSlide();
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]);
 
   return (
     <>
