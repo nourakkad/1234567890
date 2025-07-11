@@ -3,9 +3,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 const Portfolio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [currentX, setCurrentX] = useState(0);
-  const [dragDistance, setDragDistance] = useState(0);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const carouselRef = useRef(null);
   
   const originalPortfolioItems = [
@@ -54,9 +53,8 @@ const Portfolio = () => {
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => {
       const next = prev + 1;
-      // If we reach the end of the original items, jump to the middle set
       if (next >= originalLength) {
-        return originalLength; // Jump to the middle set
+        return originalLength;
       }
       return next;
     });
@@ -65,27 +63,23 @@ const Portfolio = () => {
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => {
       const next = prev - 1;
-      // If we go below 0, jump to the middle set
       if (next < 0) {
-        return originalLength - 1; // Jump to the last item of middle set
+        return originalLength - 1;
       }
       return next;
     });
   }, [originalLength]);
 
   const goToSlide = (index) => {
-    // Map the dot index to the middle set of items
     setCurrentSlide(index + originalLength);
   };
 
   // Handle infinite loop reset
   useEffect(() => {
     const handleTransitionEnd = () => {
-      // If we're at the end of the original items, jump to middle set
       if (currentSlide >= originalLength * 2) {
         setCurrentSlide(originalLength);
       }
-      // If we're at the beginning of the original items, jump to middle set
       if (currentSlide < originalLength) {
         setCurrentSlide(originalLength);
       }
@@ -98,52 +92,45 @@ const Portfolio = () => {
     }
   }, [currentSlide, originalLength]);
 
-  // Fixed touch/mouse handlers with correct direction logic
-  const handleStart = useCallback((e) => {
+  // Simple drag handlers
+  const handleDragStart = useCallback((e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     setIsDragging(true);
-    setStartX(clientX);
-    setCurrentX(clientX);
-    setDragDistance(0);
+    setDragStart(clientX);
+    setDragOffset(0);
   }, []);
 
-  const handleMove = useCallback((e) => {
+  const handleDragMove = useCallback((e) => {
     if (!isDragging) return;
     
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const distance = clientX - startX; // Fixed: positive when swiping right
+    const offset = clientX - dragStart;
+    setDragOffset(offset);
     
-    setCurrentX(clientX);
-    setDragDistance(distance);
-    
-    // Prevent default to stop scrolling
     e.preventDefault();
-  }, [isDragging, startX]);
+  }, [isDragging, dragStart]);
 
-  const handleEnd = useCallback(() => {
+  const handleDragEnd = useCallback(() => {
     if (!isDragging) return;
     
     setIsDragging(false);
-    setDragDistance(0);
+    setDragOffset(0);
     
-    const diff = currentX - startX; // Fixed: positive when swiping right
-    const threshold = 30; // Reduced threshold for easier swiping on mobile
+    const threshold = 50;
     
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // Swiped right - go to previous slide
-        prevSlide();
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        prevSlide(); // Swipe right = previous
       } else {
-        // Swiped left - go to next slide
-        nextSlide();
+        nextSlide(); // Swipe left = next
       }
     }
-  }, [isDragging, startX, currentX, nextSlide, prevSlide]);
+  }, [isDragging, dragOffset, nextSlide, prevSlide]);
 
   // Auto-advance slides every 5 seconds (only on desktop)
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
-    if (isMobile) return; // Don't auto-advance on mobile
+    if (isMobile) return;
     
     const interval = setInterval(() => {
       nextSlide();
@@ -154,40 +141,39 @@ const Portfolio = () => {
   // Update CSS custom property for desktop layout
   useEffect(() => {
     if (carouselRef.current) {
-      // Calculate the effective slide position for the middle set
       const effectiveSlide = currentSlide - originalLength;
       carouselRef.current.style.setProperty('--current-slide', effectiveSlide);
     }
   }, [currentSlide, originalLength]);
 
-  // Fixed event listeners with better desktop support
+  // Event listeners
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Mouse events for desktop
-    carousel.addEventListener('mousedown', handleStart);
-    carousel.addEventListener('mousemove', handleMove);
-    carousel.addEventListener('mouseup', handleEnd);
-    carousel.addEventListener('mouseleave', handleEnd);
+    // Mouse events
+    carousel.addEventListener('mousedown', handleDragStart);
+    carousel.addEventListener('mousemove', handleDragMove);
+    carousel.addEventListener('mouseup', handleDragEnd);
+    carousel.addEventListener('mouseleave', handleDragEnd);
 
-    // Touch events for mobile
-    carousel.addEventListener('touchstart', handleStart, { passive: false });
-    carousel.addEventListener('touchmove', handleMove, { passive: false });
-    carousel.addEventListener('touchend', handleEnd, { passive: true });
+    // Touch events
+    carousel.addEventListener('touchstart', handleDragStart, { passive: false });
+    carousel.addEventListener('touchmove', handleDragMove, { passive: false });
+    carousel.addEventListener('touchend', handleDragEnd, { passive: true });
 
     return () => {
-      carousel.removeEventListener('mousedown', handleStart);
-      carousel.removeEventListener('mousemove', handleMove);
-      carousel.removeEventListener('mouseup', handleEnd);
-      carousel.removeEventListener('mouseleave', handleEnd);
-      carousel.removeEventListener('touchstart', handleStart);
-      carousel.removeEventListener('touchmove', handleMove);
-      carousel.removeEventListener('touchend', handleEnd);
+      carousel.removeEventListener('mousedown', handleDragStart);
+      carousel.removeEventListener('mousemove', handleDragMove);
+      carousel.removeEventListener('mouseup', handleDragEnd);
+      carousel.removeEventListener('mouseleave', handleDragEnd);
+      carousel.removeEventListener('touchstart', handleDragStart);
+      carousel.removeEventListener('touchmove', handleDragMove);
+      carousel.removeEventListener('touchend', handleDragEnd);
     };
-  }, [handleStart, handleMove, handleEnd]);
+  }, [handleDragStart, handleDragMove, handleDragEnd]);
 
-  // Calculate the effective slide for display (middle set)
+  // Calculate the effective slide for display
   const effectiveSlide = currentSlide - originalLength;
 
   return (
@@ -216,13 +202,13 @@ const Portfolio = () => {
               <div 
                 className="custom-carousel"
                 ref={carouselRef}
-                style={{ touchAction: 'pan-y' }} // Allow vertical scrolling while preventing horizontal
+                style={{ touchAction: 'pan-y' }}
               >
                 <div className="carousel-container">
                   <div 
                     className="carousel-track" 
                     style={{ 
-                      transform: `translateX(calc(-${currentSlide * 100}% + ${dragDistance}px))`,
+                      transform: `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))`,
                       transition: isDragging ? 'none' : 'transform 0.3s ease-out'
                     }}
                   >
