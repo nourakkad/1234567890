@@ -1931,13 +1931,8 @@ Portfolio
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
-}
-
-.custom-carousel:active {
-  cursor: grabbing;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .carousel-container {
@@ -1966,10 +1961,6 @@ Portfolio
   .carousel-slide {
     flex: 0 0 33.333%;
     width: 33.333%;
-  }
-  
-  .carousel-track {
-    transform: translateX(calc(-33.333% * var(--current-slide, 0))) !important;
   }
   
   .portfolio-item {

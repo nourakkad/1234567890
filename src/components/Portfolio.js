@@ -7,7 +7,7 @@ const Portfolio = () => {
   const [dragOffset, setDragOffset] = useState(0);
   const carouselRef = useRef(null);
   
-  const originalPortfolioItems = [
+  const portfolioItems = [
     {
       id: 1,
       image: "assets/images/Tembix.png",
@@ -46,61 +46,27 @@ const Portfolio = () => {
     }
   ];
 
-  // Create infinite loop array by duplicating items
-  const portfolioItems = [...originalPortfolioItems, ...originalPortfolioItems, ...originalPortfolioItems];
-  const originalLength = originalPortfolioItems.length;
-
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => {
-      const next = prev + 1;
-      if (next >= originalLength) {
-        return originalLength;
-      }
-      return next;
-    });
-  }, [originalLength]);
+    setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
+  }, [portfolioItems.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => {
-      const next = prev - 1;
-      if (next < 0) {
-        return originalLength - 1;
-      }
-      return next;
-    });
-  }, [originalLength]);
+    setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
+  }, [portfolioItems.length]);
 
   const goToSlide = (index) => {
-    setCurrentSlide(index + originalLength);
+    setCurrentSlide(index);
   };
 
-  // Handle infinite loop reset
-  useEffect(() => {
-    const handleTransitionEnd = () => {
-      if (currentSlide >= originalLength * 2) {
-        setCurrentSlide(originalLength);
-      }
-      if (currentSlide < originalLength) {
-        setCurrentSlide(originalLength);
-      }
-    };
-
-    const carousel = carouselRef.current;
-    if (carousel) {
-      carousel.addEventListener('transitionend', handleTransitionEnd);
-      return () => carousel.removeEventListener('transitionend', handleTransitionEnd);
-    }
-  }, [currentSlide, originalLength]);
-
-  // Simple drag handlers
-  const handleDragStart = useCallback((e) => {
+  // Simple swipe handlers
+  const handleSwipeStart = useCallback((e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     setIsDragging(true);
     setDragStart(clientX);
     setDragOffset(0);
   }, []);
 
-  const handleDragMove = useCallback((e) => {
+  const handleSwipeMove = useCallback((e) => {
     if (!isDragging) return;
     
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -110,7 +76,7 @@ const Portfolio = () => {
     e.preventDefault();
   }, [isDragging, dragStart]);
 
-  const handleDragEnd = useCallback(() => {
+  const handleSwipeEnd = useCallback(() => {
     if (!isDragging) return;
     
     setIsDragging(false);
@@ -138,43 +104,44 @@ const Portfolio = () => {
     return () => clearInterval(interval);
   }, [nextSlide]);
 
-  // Update CSS custom property for desktop layout
-  useEffect(() => {
-    if (carouselRef.current) {
-      const effectiveSlide = currentSlide - originalLength;
-      carouselRef.current.style.setProperty('--current-slide', effectiveSlide);
-    }
-  }, [currentSlide, originalLength]);
-
   // Event listeners
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Mouse events
-    carousel.addEventListener('mousedown', handleDragStart);
-    carousel.addEventListener('mousemove', handleDragMove);
-    carousel.addEventListener('mouseup', handleDragEnd);
-    carousel.addEventListener('mouseleave', handleDragEnd);
+    // Mouse events for desktop
+    carousel.addEventListener('mousedown', handleSwipeStart);
+    carousel.addEventListener('mousemove', handleSwipeMove);
+    carousel.addEventListener('mouseup', handleSwipeEnd);
+    carousel.addEventListener('mouseleave', handleSwipeEnd);
 
-    // Touch events
-    carousel.addEventListener('touchstart', handleDragStart, { passive: false });
-    carousel.addEventListener('touchmove', handleDragMove, { passive: false });
-    carousel.addEventListener('touchend', handleDragEnd, { passive: true });
+    // Touch events for mobile
+    carousel.addEventListener('touchstart', handleSwipeStart, { passive: false });
+    carousel.addEventListener('touchmove', handleSwipeMove, { passive: false });
+    carousel.addEventListener('touchend', handleSwipeEnd, { passive: true });
 
     return () => {
-      carousel.removeEventListener('mousedown', handleDragStart);
-      carousel.removeEventListener('mousemove', handleDragMove);
-      carousel.removeEventListener('mouseup', handleDragEnd);
-      carousel.removeEventListener('mouseleave', handleDragEnd);
-      carousel.removeEventListener('touchstart', handleDragStart);
-      carousel.removeEventListener('touchmove', handleDragMove);
-      carousel.removeEventListener('touchend', handleDragEnd);
+      carousel.removeEventListener('mousedown', handleSwipeStart);
+      carousel.removeEventListener('mousemove', handleSwipeMove);
+      carousel.removeEventListener('mouseup', handleSwipeEnd);
+      carousel.removeEventListener('mouseleave', handleSwipeEnd);
+      carousel.removeEventListener('touchstart', handleSwipeStart);
+      carousel.removeEventListener('touchmove', handleSwipeMove);
+      carousel.removeEventListener('touchend', handleSwipeEnd);
     };
-  }, [handleDragStart, handleDragMove, handleDragEnd]);
+  }, [handleSwipeStart, handleSwipeMove, handleSwipeEnd]);
 
-  // Calculate the effective slide for display
-  const effectiveSlide = currentSlide - originalLength;
+  // Calculate transform based on screen size
+  const getTransform = () => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Mobile: move by 100% (one card at a time)
+      return `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))`;
+    } else {
+      // Desktop: move by 33.333% (one card at a time when showing 3 cards)
+      return `translateX(calc(-${currentSlide * 33.333}% + ${dragOffset}px))`;
+    }
+  };
 
   return (
     <>
@@ -208,7 +175,7 @@ const Portfolio = () => {
                   <div 
                     className="carousel-track" 
                     style={{ 
-                      transform: `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))`,
+                      transform: getTransform(),
                       transition: isDragging ? 'none' : 'transform 0.3s ease-out'
                     }}
                   >
@@ -248,10 +215,10 @@ const Portfolio = () => {
                 
                 {/* Dots Indicator */}
                 <div className="carousel-dots">
-                  {originalPortfolioItems.map((_, index) => (
+                  {portfolioItems.map((_, index) => (
                     <button
                       key={index}
-                      className={`carousel-dot ${index === effectiveSlide ? 'active' : ''}`}
+                      className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
                       onClick={() => goToSlide(index)}
                     ></button>
                   ))}
