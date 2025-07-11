@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 const Portfolio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const [dragDistance, setDragDistance] = useState(0);
+  const carouselRef = useRef(null);
   
-  const portfolioItems = [
+  const originalPortfolioItems = [
     {
       id: 1,
       image: "assets/images/Tembix.png",
@@ -42,25 +47,148 @@ const Portfolio = () => {
     }
   ];
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
-  }, [portfolioItems.length]);
+  // Create infinite loop array by duplicating items
+  const portfolioItems = [...originalPortfolioItems, ...originalPortfolioItems, ...originalPortfolioItems];
+  const originalLength = originalPortfolioItems.length;
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
-  };
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => {
+      const next = prev + 1;
+      // If we reach the end of the original items, jump to the middle set
+      if (next >= originalLength) {
+        return originalLength; // Jump to the middle set
+      }
+      return next;
+    });
+  }, [originalLength]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => {
+      const next = prev - 1;
+      // If we go below 0, jump to the middle set
+      if (next < 0) {
+        return originalLength - 1; // Jump to the last item of middle set
+      }
+      return next;
+    });
+  }, [originalLength]);
 
   const goToSlide = (index) => {
-    setCurrentSlide(index);
+    // Map the dot index to the middle set of items
+    setCurrentSlide(index + originalLength);
   };
 
-  // Auto-advance slides every 5 seconds
+  // Handle infinite loop reset
   useEffect(() => {
+    const handleTransitionEnd = () => {
+      // If we're at the end of the original items, jump to middle set
+      if (currentSlide >= originalLength * 2) {
+        setCurrentSlide(originalLength);
+      }
+      // If we're at the beginning of the original items, jump to middle set
+      if (currentSlide < originalLength) {
+        setCurrentSlide(originalLength);
+      }
+    };
+
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener('transitionend', handleTransitionEnd);
+      return () => carousel.removeEventListener('transitionend', handleTransitionEnd);
+    }
+  }, [currentSlide, originalLength]);
+
+  // Fixed touch/mouse handlers with correct direction logic
+  const handleStart = useCallback((e) => {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    setIsDragging(true);
+    setStartX(clientX);
+    setCurrentX(clientX);
+    setDragDistance(0);
+  }, []);
+
+  const handleMove = useCallback((e) => {
+    if (!isDragging) return;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const distance = clientX - startX; // Fixed: positive when swiping right
+    
+    setCurrentX(clientX);
+    setDragDistance(distance);
+    
+    // Prevent default to stop scrolling
+    e.preventDefault();
+  }, [isDragging, startX]);
+
+  const handleEnd = useCallback(() => {
+    if (!isDragging) return;
+    
+    setIsDragging(false);
+    setDragDistance(0);
+    
+    const diff = currentX - startX; // Fixed: positive when swiping right
+    const threshold = 30; // Reduced threshold for easier swiping on mobile
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swiped right - go to previous slide
+        prevSlide();
+      } else {
+        // Swiped left - go to next slide
+        nextSlide();
+      }
+    }
+  }, [isDragging, startX, currentX, nextSlide, prevSlide]);
+
+  // Auto-advance slides every 5 seconds (only on desktop)
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return; // Don't auto-advance on mobile
+    
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
     return () => clearInterval(interval);
   }, [nextSlide]);
+
+  // Update CSS custom property for desktop layout
+  useEffect(() => {
+    if (carouselRef.current) {
+      // Calculate the effective slide position for the middle set
+      const effectiveSlide = currentSlide - originalLength;
+      carouselRef.current.style.setProperty('--current-slide', effectiveSlide);
+    }
+  }, [currentSlide, originalLength]);
+
+  // Fixed event listeners with better desktop support
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    // Mouse events for desktop
+    carousel.addEventListener('mousedown', handleStart);
+    carousel.addEventListener('mousemove', handleMove);
+    carousel.addEventListener('mouseup', handleEnd);
+    carousel.addEventListener('mouseleave', handleEnd);
+
+    // Touch events for mobile
+    carousel.addEventListener('touchstart', handleStart, { passive: false });
+    carousel.addEventListener('touchmove', handleMove, { passive: false });
+    carousel.addEventListener('touchend', handleEnd, { passive: true });
+
+    return () => {
+      carousel.removeEventListener('mousedown', handleStart);
+      carousel.removeEventListener('mousemove', handleMove);
+      carousel.removeEventListener('mouseup', handleEnd);
+      carousel.removeEventListener('mouseleave', handleEnd);
+      carousel.removeEventListener('touchstart', handleStart);
+      carousel.removeEventListener('touchmove', handleMove);
+      carousel.removeEventListener('touchend', handleEnd);
+    };
+  }, [handleStart, handleMove, handleEnd]);
+
+  // Calculate the effective slide for display (middle set)
+  const effectiveSlide = currentSlide - originalLength;
 
   return (
     <>
@@ -85,17 +213,21 @@ const Portfolio = () => {
         <div className="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
           <div className="row">
             <div className="col-lg-12">
-              <div className="custom-carousel">
+              <div 
+                className="custom-carousel"
+                ref={carouselRef}
+                style={{ touchAction: 'pan-y' }} // Allow vertical scrolling while preventing horizontal
+              >
                 <div className="carousel-container">
                   <div 
                     className="carousel-track" 
                     style={{ 
-                      transform: `translateX(-${currentSlide * 100}%)`,
-                      transition: 'transform 0.5s ease-in-out'
+                      transform: `translateX(calc(-${currentSlide * 100}% + ${dragDistance}px))`,
+                      transition: isDragging ? 'none' : 'transform 0.3s ease-out'
                     }}
                   >
                     {portfolioItems.map((item, index) => (
-                      <div key={item.id} className="carousel-slide">
+                      <div key={`${item.id}-${index}`} className="carousel-slide">
                         <div className="portfolio-item">
                           <div className="thumb">
                             <img src={item.image} alt={item.alt} />
@@ -128,20 +260,12 @@ const Portfolio = () => {
                   </div>
                 </div>
                 
-                {/* Navigation Buttons */}
-                <button className="carousel-nav carousel-prev" onClick={prevSlide}>
-                  <i className="fas fa-chevron-left"></i>
-                </button>
-                <button className="carousel-nav carousel-next" onClick={nextSlide}>
-                  <i className="fas fa-chevron-right"></i>
-                </button>
-                
                 {/* Dots Indicator */}
                 <div className="carousel-dots">
-                  {portfolioItems.map((_, index) => (
+                  {originalPortfolioItems.map((_, index) => (
                     <button
                       key={index}
-                      className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                      className={`carousel-dot ${index === effectiveSlide ? 'active' : ''}`}
                       onClick={() => goToSlide(index)}
                     ></button>
                   ))}
