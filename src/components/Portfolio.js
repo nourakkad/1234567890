@@ -23,8 +23,8 @@ const Portfolio = () => (
       <div className="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
         <div className="row">
           <div className="col-lg-12">
-            <div className="loop owl-carousel">
-              <div className="item">
+            <div className="portfolio-grid">
+              <div className="portfolio-item-wrapper">
                 <div className="portfolio-item">
                   <div className="thumb">
                     <img src="assets/images/Tembix.png" alt="Timbex Client Project" />
@@ -51,7 +51,8 @@ const Portfolio = () => (
                   </a>
                 </div>
               </div>
-              <div className="item">
+              
+              <div className="portfolio-item-wrapper">
                 <div className="portfolio-item">
                   <div className="thumb">
                     <img src="assets/images/Sabco.png" alt="Sabco Client Project" />
@@ -78,7 +79,8 @@ const Portfolio = () => (
                   </a>
                 </div>
               </div>
-              <div className="item">
+              
+              <div className="portfolio-item-wrapper">
                 <div className="portfolio-item">
                   <div className="thumb">
                     <img src="assets/images/damascusgin.png" alt="Damascus Gin Client Project" />
@@ -105,8 +107,6 @@ const Portfolio = () => (
                   </a>
                 </div>
               </div>
-              
-             
             </div>
           </div>
         </div>

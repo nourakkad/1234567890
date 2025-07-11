@@ -1925,8 +1925,24 @@ Portfolio
   z-index: 222;
 }
 
-.loop .portfolio-item {
-  width: 320px;
+/* Portfolio Grid Layout */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.portfolio-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loop .portfolio-item,
+.portfolio-item {
+  width: 100%;
+  max-width: 320px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -1940,7 +1956,8 @@ Portfolio
   transition: all 0.3s ease;
 }
 
-.loop .portfolio-item:hover {
+.loop .portfolio-item:hover,
+.portfolio-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
@@ -2045,10 +2062,16 @@ Portfolio
   text-align: center;
 }
 @media (max-width: 600px) {
-  .loop .portfolio-item {
-    width: 98vw !important;
-    min-width: 0 !important;
-    max-width: 100vw !important;
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 15px 0;
+  }
+  
+  .loop .portfolio-item,
+  .portfolio-item {
+    width: 100% !important;
+    max-width: 100% !important;
     height: 220px !important;
   }
   
@@ -2086,6 +2109,11 @@ Portfolio
 }
 
 @media (max-width: 767px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
   .portfolio-item .down-content h4 {
     font-size: 18px;
   }
