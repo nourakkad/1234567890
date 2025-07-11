@@ -1,85 +1,75 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="footer-section">
+  <footer className="footer-section modern-footer">
     <div className="footer-top">
       <div className="container">
-        <div className="row">
-          <div className="col-lg-4 col-md-6">
-            <div className="footer-widget">
-              <div className="footer-logo">
-                <a href="#top">
-                  <img src="assets/images/LOGO ELYPTEK .png" className="img-fluid" alt="logo" />
-                </a>
-              </div>
-              <div className="footer-text">
-                <p>
-                  Where innovation meets expertise . We specialize in software
-                  development , web design , cybersecurity , and more .
-                </p>
-              </div>
-              <div className="footer-social-links">
-                <div className="social-icons">
-                  <a href="https://www.facebook.com/share/1FTGLY6bvR/" className="facebook">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="https://www.instagram.com/elyptek.co?igsh=MXRwOHN0eXJueXRoNA==" className="instagram">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
+        <div className="footer-row">
+          {/* Left: Logo, Quote, Socials */}
+          <div className="footer-col footer-col-left">
+            <div className="footer-logo">
+              <a href="#top" aria-label="Back to top">
+                <img src="assets/images/LOGO ELYPTEK .png" alt="Elyptek logo" />
+              </a>
+            </div>
+            <p className="footer-quote">
+              Empowering businesses with innovative digital solutions and cutting-edge technology.
+            </p>
+            <div className="footer-social-links">
+              <a href="https://www.facebook.com/share/1FTGLY6bvR/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="facebook">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/elyptek.co" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="instagram">
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a href="https://wa.me/963956009824" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="whatsapp">
+                <i className="fab fa-whatsapp"></i>
+              </a>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="footer-widget">
-              <h4>Quick Links</h4>
-              <div className="footer-links">
-                <ul>
-                  <li><a href="#top"><i className="fas fa-chevron-right"></i> Home</a></li>
-                  <li><a href="#about"><i className="fas fa-chevron-right"></i> About</a></li>
-                  <li><a href="#services"><i className="fas fa-chevron-right"></i> Services</a></li>
-                  <li><a href="#portfolio"><i className="fas fa-chevron-right"></i> Portfolio</a></li>
-                  <li><a href="#contact"><i className="fas fa-chevron-right"></i> Contact</a></li>
-                </ul>
-              </div>
-            </div>
+
+          {/* Center: Quick Links */}
+          <div className="footer-col footer-col-center">
+            <h4 className="footer-title left-list">Quick Links</h4>
+            <ul className="footer-links-list">
+              <li><a href="#top">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Our Services</a></li>
+              <li><a href="#portfolio">Portfolio</a></li>
+              <li><a href="#team">Our Team</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
           </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="footer-widget">
-              <h4>Contact Info</h4>
-              <div className="contact-info">
-                <div className="contact-item">
-                  <i className="fas fa-envelope"></i>
-                  <div className="content">
-                    <p>anasalomari0934@gmail.com</p>
-                  </div>
-                </div>
-                <div className="contact-item">
-                  <i className="fas fa-phone-alt"></i>
-                  <div className="content">
-                    <p>+963934092373</p>
-                  </div>
-                </div>
-                <div className="contact-item">
-                  <i className="fas fa-map-marker-alt"></i>
-                  <div className="content">
-                    <p>Syria, Damascus </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+          {/* Right: Contact Info */}
+          <div className="footer-col footer-col-right">
+            <h4 className="footer-title left-list">Contact Info</h4>
+            <ul className="footer-contact-list">
+              <li>
+                <i className="fas fa-phone-alt"></i>
+                <a href="tel:+963993887774" className="footer-link-white">+963 993 887 774</a>
+              </li>
+              <li>
+                <i className="fas fa-envelope"></i>
+                <a href="mailto:elyptek@gmail.com" className="footer-link-white">elyptek@gmail.com</a>
+              </li>
+              <li>
+                <i className="fas fa-map-marker-alt"></i>
+                <span>Shaalan, Damascus, Syria</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+    
     <div className="footer-bottom">
       <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <p className="copyright text-center">
-              Copyright © 2025 <span className="footer-brand">Elyptek</span> . All Rights Reserved .
-            </p>
-          </div>
+        <div className="footer-bottom-row">
+          <p className="copyright">
+            © 2025 <span className="footer-brand">Elyptek</span>. All Rights Reserved. 
+            
+          </p>
         </div>
       </div>
     </div>
