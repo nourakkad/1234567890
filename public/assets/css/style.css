@@ -1925,7 +1925,37 @@ Portfolio
   z-index: 222;
 }
 
-/* Portfolio Grid Layout */
+/* Custom Carousel Layout */
+.custom-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Portfolio Grid Layout (fallback) */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -2062,6 +2092,39 @@ Portfolio
   text-align: center;
 }
 @media (max-width: 600px) {
+  .custom-carousel {
+    max-width: 100%;
+  }
+  
+  .carousel-slide {
+    padding: 0 10px;
+  }
+  
+  .carousel-nav {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  
+  .carousel-prev {
+    left: 5px;
+  }
+  
+  .carousel-next {
+    right: 5px;
+  }
+  
+  .carousel-dots {
+    margin-top: 15px;
+    gap: 8px;
+  }
+  
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Fallback grid for very small screens */
   .portfolio-grid {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -2109,6 +2172,38 @@ Portfolio
 }
 
 @media (max-width: 767px) {
+  .custom-carousel {
+    max-width: 100%;
+  }
+  
+  .carousel-slide {
+    padding: 0 15px;
+  }
+  
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .carousel-prev {
+    left: 10px;
+  }
+  
+  .carousel-next {
+    right: 10px;
+  }
+  
+  .carousel-dots {
+    margin-top: 20px;
+  }
+  
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  /* Fallback grid for mobile */
   .portfolio-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
@@ -2143,6 +2238,75 @@ Portfolio
   }
 }
 
+/* Custom Carousel Navigation */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #2a2a2a;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-nav:hover {
+  background: #ffa700;
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(248, 179, 24, 0.3);
+}
+
+.carousel-prev {
+  left: 20px;
+}
+
+.carousel-next {
+  right: 20px;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(248, 179, 24, 0.5);
+  border-color: #ffa700;
+}
+
+.carousel-dot.active {
+  background: #ffa700;
+  border-color: #ffa700;
+  transform: scale(1.2);
+}
+
+/* Original Owl Navigation (kept for reference) */
 .our-portfolio .owl-nav {
   display: inline-block !important;
   position: absolute;
