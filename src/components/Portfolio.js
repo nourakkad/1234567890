@@ -36,33 +36,6 @@ const Portfolio = () => {
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
       website: "https://sabco.com"
-    },
-    {
-      id: 4,
-      title: "Hcb",
-      category: "Software Development",
-      image: "/assets/images/hcb.jpg",
-      instagram: "https://www.instagram.com/hcb/",
-      facebook: "https://www.facebook.com/hcb",
-      website: "https://hcb.com"
-    },
-    {
-      id: 5,
-      title: "GD",
-      category: "Graphic Design",
-      image: "/assets/images/gd.png",
-      instagram: "https://www.instagram.com/gd/",
-      facebook: "https://www.facebook.com/gd",
-      website: "https://gd.com"
-    },
-    {
-      id: 6,
-      title: "SD",
-      category: "Software Development",
-      image: "/assets/images/sd.png",
-      instagram: "https://www.instagram.com/sd/",
-      facebook: "https://www.facebook.com/sd",
-      website: "https://sd.com"
     }
   ];
 
@@ -78,16 +51,14 @@ const Portfolio = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Infinite loop logic
   const totalItems = portfolioItems.length;
-  const actualIndex = currentIndex % totalItems;
 
   const goToNext = () => {
-    setCurrentIndex(prev => prev + 1);
+    setCurrentIndex(prev => (prev + 1) % totalItems);
   };
 
   const goToPrev = () => {
-    setCurrentIndex(prev => prev - 1);
+    setCurrentIndex(prev => (prev - 1 + totalItems) % totalItems);
   };
 
   const goToSlide = (index) => {
@@ -152,18 +123,144 @@ const Portfolio = () => {
     }
   };
 
-  // Calculate transform for desktop vs mobile
+  // Calculate transform for mobile only
   const getTransform = () => {
-    if (isMobile) {
-      return `translateX(-${actualIndex * 100}%)`;
-    } else {
-      return `translateX(-${actualIndex * 33.333}%)`;
-    }
+    return `translateX(-${currentIndex * 100}%)`;
   };
 
+  // Render portfolio item
+  const renderPortfolioItem = (item) => (
+    <div className="portfolio-item-wrapper">
+      <div className="portfolio-item" style={{ 
+        height: '400px', 
+        width: '100%',
+        maxWidth: '320px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        background: '#fff',
+        borderRadius: '18px',
+        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
+        overflow: 'hidden',
+        margin: '0 auto',
+        transition: 'all 0.3s ease'
+      }}>
+        <div className="thumb" style={{ 
+          height: '250px', 
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          position: 'relative',
+          padding: '20px'
+        }}>
+          <img 
+            src={item.image} 
+            alt={item.title} 
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              objectPosition: 'center',
+              backgroundColor: '#fff',
+              borderRadius: '18px 18px 0 0',
+              display: 'block'
+            }}
+          />
+          <div className="portfolio-overlay">
+            <div className="overlay-content">
+              <i className="fa fa-eye"></i>
+            </div>
+          </div>
+        </div>
+        <div className="down-content" style={{
+          width: '100%',
+          padding: '18px 12px 16px 12px',
+          textAlign: 'center',
+          flex: '1',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            <h4 style={{ fontSize: '20px', fontWeight: '700', color: '#2a2a2a', marginBottom: '8px' }}>{item.title}</h4>
+            <span style={{ fontSize: '15px', color: '#afafaf' }}>{item.category}</span>
+          </div>
+          <div className="portfolio-social-buttons" style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '15px',
+            marginTop: '20px',
+            padding: '0 20px'
+          }}>
+            <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn" style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              fontSize: '16px',
+              color: '#fff',
+              border: '2px solid transparent',
+              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
+            }}>
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn" style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              fontSize: '16px',
+              color: '#fff',
+              border: '2px solid transparent',
+              background: '#1877f2'
+            }}>
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href={item.website} target="_blank" rel="noopener noreferrer" className="social-btn website-btn" style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              fontSize: '16px',
+              color: '#fff',
+              border: '2px solid transparent',
+              background: '#ffa700'
+            }}>
+              <i className="fas fa-globe"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
+    <>
+    <div className="section-divider">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:'block',width:'100%',height:'60px'}}>
+          <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
+        </svg>
+      </div>
     <div id="portfolio" className="our-portfolio">
+    
       <div className="container-fluid">
+    
         <div className="row">
           <div className="col-lg-12">
             <div className="section-heading">
@@ -174,91 +271,62 @@ const Portfolio = () => {
           </div>
         </div>
         
-        <div className="custom-carousel" ref={carouselRef}>
-          <div className="carousel-container">
-            <div 
-              className="carousel-track"
-              ref={trackRef}
-              style={{
-                transform: getTransform(),
-                transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
-              }}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-            >
-              {portfolioItems.map((item, index) => (
-                <div key={item.id} className="carousel-slide">
-                  <div className="portfolio-item-wrapper">
-                    <div className="portfolio-item">
-                      <div className="thumb">
-                        <img src={item.image} alt={item.title} />
-                        <div className="portfolio-overlay">
-                          <div className="overlay-content">
-                            <i className="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="down-content">
-                        <h4>{item.title}</h4>
-                        <span>{item.category}</span>
-                      </div>
-                      <div className="portfolio-social-buttons">
-                        <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn">
-                          <i className="fab fa-instagram"></i>
-                        </a>
-                        <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn">
-                          <i className="fab fa-facebook"></i>
-                        </a>
-                        <a href={item.website} target="_blank" rel="noopener noreferrer" className="social-btn website-btn">
-                          <i className="fas fa-globe"></i>
-                        </a>
-                      </div>
-                    </div>
+        {/* Desktop Grid Layout */}
+        {!isMobile && (
+          <div className="portfolio-grid">
+            {portfolioItems.map((item) => (
+              <div key={item.id} className="portfolio-item-wrapper">
+                {renderPortfolioItem(item)}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Mobile Carousel */}
+        {isMobile && (
+          <div className="custom-carousel" ref={carouselRef}>
+            <div className="carousel-container">
+              <div 
+                className="carousel-track"
+                ref={trackRef}
+                style={{
+                  transform: getTransform(),
+                  transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
+                {portfolioItems.map((item, index) => (
+                  <div key={item.id} className="carousel-slide">
+                    {renderPortfolioItem(item)}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
+        )}
 
-          {/* Desktop Navigation Buttons */}
-          {!isMobile && (
-            <>
-              <button 
-                className="carousel-nav carousel-prev" 
-                onClick={goToPrev}
-                aria-label="Previous slide"
-              >
-                <i className="fas fa-chevron-left"></i>
-              </button>
-              <button 
-                className="carousel-nav carousel-next" 
-                onClick={goToNext}
-                aria-label="Next slide"
-              >
-                <i className="fas fa-chevron-right"></i>
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* Carousel Dots */}
-        <div className="carousel-dots">
-          {portfolioItems.map((_, index) => (
-            <button
-              key={index}
-              className={`carousel-dot ${index === actualIndex ? 'active' : ''}`}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        {/* Mobile Carousel Dots */}
+        {isMobile && (
+          <div className="carousel-dots">
+            {portfolioItems.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
+    </>
   );
 };
 
