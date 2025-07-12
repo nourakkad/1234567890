@@ -176,7 +176,27 @@ body {
 
 .section-heading h4 em {
   font-style: normal;
-  color: #ffa700;
+  color: #ffa700 !important;
+}
+
+/* Ensure em tags in section headings are orange in both LTR and RTL */
+.rtl-banner .section-heading h4 em,
+.rtl-about .section-heading h4 em,
+.rtl-services .section-heading h4 em,
+.rtl-team .section-heading h4 em,
+.rtl-portfolio .section-heading h4 em,
+.rtl-contact .section-heading h4 em {
+  color: #ffa700 !important;
+}
+
+/* Banner custom title em styling */
+.custom-title.solutions em {
+  color: #ffa700 !important;
+  font-style: normal;
+}
+
+.rtl-banner .custom-title.solutions em {
+  color: #ffa700 !important;
 }
 
 .section-heading .line-dec {
@@ -3835,6 +3855,510 @@ img, video {
 }
 
 /* --- Responsive Overhaul End --- */
+
+/* RTL Support for Arabic - Only for specific components */
+.rtl-banner {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-about {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-services {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-team {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-portfolio {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-contact {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Arabic font support for RTL components */
+.rtl-banner body,
+.rtl-about body,
+.rtl-services body,
+.rtl-team body,
+.rtl-portfolio body,
+.rtl-contact body {
+  font-family: "Poppins", "Segoe UI", "Tahoma", "Arial", sans-serif;
+}
+
+/* Preserve center alignment */
+.rtl-banner .text-center,
+.rtl-about .text-center,
+.rtl-services .text-center,
+.rtl-team .text-center,
+.rtl-portfolio .text-center,
+.rtl-contact .text-center,
+.rtl-banner .section-heading,
+.rtl-about .section-heading,
+.rtl-services .section-heading,
+.rtl-team .section-heading,
+.rtl-portfolio .section-heading,
+.rtl-contact .section-heading,
+.rtl-team .team-member .member-info,
+.rtl-portfolio .portfolio-item .down-content,
+.rtl-portfolio .our-portfolio .section-heading,
+.rtl-services .services .naccs .menu div .thumb,
+.rtl-services .service-tab-content,
+.rtl-banner .main-banner .custom-hero-text,
+.rtl-banner .main-banner .custom-title-group,
+.rtl-banner .main-banner .icon-animate-row,
+.rtl-about .skills-content,
+.rtl-contact .contact-us .section-heading,
+.rtl-contact .contact-us .section-heading p,
+.rtl-contact .contact-us .section-heading h6,
+.rtl-contact .contact-us .section-heading h4,
+.rtl-contact .contact-us .section-heading .line-dec {
+  text-align: center;
+}
+
+/* Force center alignment for contact section */
+.rtl-contact .contact-us .col-lg-6.offset-lg-3 {
+  text-align: center;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+}
+
+.rtl-contact .contact-us .section-heading * {
+  text-align: center !important;
+}
+
+/* Override any RTL text alignment for contact section */
+.rtl-contact .contact-us {
+  text-align: center;
+}
+
+.rtl-contact .contact-us .section-heading,
+.rtl-contact .contact-us .section-heading h6,
+.rtl-contact .contact-us .section-heading h4,
+.rtl-contact .contact-us .section-heading p {
+  text-align: center !important;
+}
+
+/* Additional contact section centering */
+.rtl-contact #contact .section-heading,
+.rtl-contact .contact-us .row,
+.rtl-contact .contact-us .container {
+  text-align: center;
+}
+
+/* Force all text in contact section to be centered */
+.rtl-contact .contact-us * {
+  text-align: center;
+}
+
+/* Center the contact section container itself */
+.rtl-contact .contact-us .col-lg-6.offset-lg-3 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+}
+
+/* Additional centering for the contact section container */
+.rtl-contact .contact-us .container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.rtl-contact .contact-us .row {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.rtl-contact .contact-us .col-lg-6.offset-lg-3 {
+  flex: 0 0 auto !important;
+  max-width: 50% !important;
+  width: 50% !important;
+}
+
+/* Specific centering for the heading row */
+.rtl-contact .contact-us .row:first-child {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.rtl-contact .contact-us .row:first-child .col-lg-6.offset-lg-3 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  max-width: 50% !important;
+  width: 50% !important;
+}
+
+/* Ensure the heading content is centered */
+.rtl-contact .contact-us .section-heading {
+  text-align: center !important;
+  margin: 0 auto !important;
+  max-width: 600px !important;
+}
+
+.rtl-contact .contact-us .section-heading h6,
+.rtl-contact .contact-us .section-heading h4,
+.rtl-contact .contact-us .section-heading p {
+  text-align: center !important;
+}
+
+.rtl-contact .contact-us .section-heading .line-dec {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force center alignment for all contact section text */
+.rtl-contact .contact-us {
+  text-align: center !important;
+}
+
+.rtl-contact .contact-us .container {
+  text-align: center !important;
+}
+
+.rtl-contact .contact-us .row {
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+.rtl-contact .contact-us .col-lg-6.offset-lg-3 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+}
+
+/* Override any RTL text alignment for contact section */
+.rtl-contact .contact-us * {
+  text-align: center !important;
+}
+
+/* Keep phone and email info left-aligned even in RTL */
+.rtl-contact .contact-us .info-post .icon a {
+  text-align: left !important;
+  direction: ltr !important;
+  display: inline-block !important;
+  text-align: left !important;
+}
+
+.rtl-contact .contact-us .info-post .icon {
+  justify-content: flex-start !important;
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+.rtl-contact .contact-us .info-post {
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+/* Override any RTL styling for contact info */
+.rtl-contact .contact-us .info-post * {
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+/* Force phone number and email to display in correct order */
+.rtl-contact .contact-us .info-post .icon a {
+  unicode-bidi: plaintext !important;
+  direction: ltr !important;
+  text-align: left !important;
+  display: inline-block !important;
+}
+
+/* Ensure the entire contact info section is LTR */
+.rtl-contact .contact-us .fill-form .row .col-lg-6:first-child {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.rtl-contact .contact-us .fill-form .row .col-lg-6:first-child * {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Keep form inputs right-aligned for RTL reading */
+.rtl-contact .contact-us input,
+.rtl-contact .contact-us textarea,
+.rtl-contact .contact-us select {
+  text-align: right !important;
+}
+
+/* But allow form inputs to be right-aligned */
+.rtl-contact .contact-us input,
+.rtl-contact .contact-us textarea,
+.rtl-contact .contact-us select {
+  text-align: right;
+}
+
+/* Center the send button in RTL mode */
+.rtl-contact .contact-us button[type="submit"] {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  float: none !important;
+  direction: ltr !important;
+  unicode-bidi: plaintext !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Center the button text content */
+.rtl-contact .contact-us button[type="submit"] * {
+  text-align: center !important;
+  direction: ltr !important;
+  unicode-bidi: plaintext !important;
+}
+
+/* Ensure button text displays correctly */
+.rtl-contact .contact-us button[type="submit"] i {
+  margin-right: 8px !important;
+  margin-left: 0 !important;
+}
+
+/* Force center alignment for the entire button container */
+.rtl-contact .contact-us .col-lg-12:last-child fieldset {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* Override any RTL inheritance for button containers */
+.rtl-contact .contact-us .col-lg-12:last-child,
+.rtl-contact .contact-us .col-lg-12:last-child * {
+  text-align: center !important;
+  direction: ltr !important;
+}
+
+.rtl-contact .contact-us fieldset:last-child {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.rtl-contact .contact-us .col-lg-12:last-child {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Center contact heading and description for both languages */
+.contact-us .section-heading {
+  text-align: center !important;
+  margin: 0 auto !important;
+  max-width: 600px !important;
+}
+
+.contact-us .section-heading h6,
+.contact-us .section-heading h4,
+.contact-us .section-heading p {
+  text-align: center !important;
+}
+
+.contact-us .section-heading .line-dec {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.contact-us .col-lg-6.offset-lg-3 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+}
+
+/* Ensure the heading row is centered */
+.contact-us .row:first-child {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.contact-us .row:first-child .col-lg-6.offset-lg-3 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  max-width: 50% !important;
+  width: 50% !important;
+}
+
+
+
+.rtl-banner .main-banner .features-list li i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.rtl-banner .main-banner .cta-buttons {
+  flex-direction: row-reverse;
+}
+
+.rtl-banner .main-banner .learn-more-button i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.rtl-banner .main-banner .custom-hero-text {
+  text-align: right;
+}
+
+.rtl-banner .main-banner .custom-title-group {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.rtl-banner .main-banner .icon-animate-row {
+  flex-direction: row-reverse;
+}
+
+.rtl-banner .main-banner .custom-subtitle {
+  text-align: right;
+}
+
+.rtl-about .about-right-content {
+  text-align: right;
+}
+
+.rtl-about .about-right-content .section-heading {
+  text-align: right;
+}
+
+/* Keep main banner centered */
+.rtl-banner .main-banner .custom-hero-text {
+  text-align: right;
+}
+
+.rtl-about .about-right-content .section-heading .line-dec {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.rtl-services .services-list .service-item {
+  text-align: right;
+}
+
+.rtl-services .services-list .service-item i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/* Keep service content centered */
+.rtl-services .service-tab-content {
+  text-align: center;
+}
+
+.rtl-services .service-tab-content .ticks-list {
+  text-align: center;
+}
+
+.rtl-services .services .naccs .menu div .thumb {
+  text-align: center;
+}
+
+.rtl-services .service-tab-content .ticks-list span i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.rtl-team .team-member .member-info {
+  text-align: center;
+}
+
+.rtl-portfolio .portfolio-item .down-content {
+  text-align: center;
+}
+
+.rtl-portfolio .our-portfolio .section-heading {
+  text-align: center;
+}
+
+.rtl-portfolio .our-portfolio .section-heading .line-dec {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rtl-portfolio .portfolio-social-buttons {
+  flex-direction: row-reverse;
+}
+
+
+
+.rtl-contact .contact-us form#contact input,
+.rtl-contact .contact-us form#contact textarea,
+.rtl-contact .contact-us form#contact select {
+  text-align: right;
+}
+
+.rtl-contact .mobile-input-group {
+  flex-direction: row-reverse;
+}
+
+.rtl-contact .mobile-input-group select {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+.rtl-contact .info-post .icon img {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+/* Mobile RTL adjustments */
+@media (max-width: 767px) {
+  
+  .rtl-banner .main-banner .custom-hero-text {
+    text-align: center;
+  }
+  
+  .rtl-about .about-right-content {
+    text-align: center;
+  }
+  
+  .rtl-services .services .naccs .menu {
+    flex-direction: row;
+  }
+  
+  .rtl-services .service-tab-content {
+    text-align: center;
+  }
+  
+
+}
 
 /* Section Divider Fixes */
 .section-divider {

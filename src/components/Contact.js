@@ -1,40 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-
-const countryCodes = [
-  { code: '+1', label: 'USA/Canada' },
-  { code: '+44', label: 'United Kingdom' },
-  { code: '+49', label: 'Germany' },
-  { code: '+33', label: 'France' },
-  { code: '+39', label: 'Italy' },
-  { code: '+34', label: 'Spain' },
-  { code: '+7', label: 'Russia' },
-  { code: '+81', label: 'Japan' },
-  { code: '+86', label: 'China' },
-  { code: '+91', label: 'India' },
-  { code: '+61', label: 'Australia' },
-  { code: '+64', label: 'New Zealand' },
-  { code: '+55', label: 'Brazil' },
-  { code: '+52', label: 'Mexico' },
-  { code: '+27', label: 'South Africa' },
-  { code: '+20', label: 'Egypt' },
-  { code: '+971', label: 'UAE' },
-  { code: '+966', label: 'Saudi Arabia' },
-  { code: '+90', label: 'Turkey' },
-  { code: '+963', label: 'Syria' },
-  { code: '+962', label: 'Jordan' },
-  { code: '+961', label: 'Lebanon' },
-  { code: '+965', label: 'Kuwait' },
-  { code: '+974', label: 'Qatar' },
-  { code: '+968', label: 'Oman' },
-  { code: '+973', label: 'Bahrain' },
-  { code: '+82', label: 'South Korea' },  
-  { code: '+60', label: 'Malaysia' },
-  { code: '+65', label: 'Singapore' },
-  { code: '+66', label: 'Thailand' },
-];
+import { getTranslation, getCountryCodes } from '../translations';
 
 const Contact = () => {
+  const [currentLanguage, setCurrentLanguage] = useState('EN');
+  const [countryCodes, setCountryCodes] = useState(getCountryCodes('EN'));
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -43,6 +13,31 @@ const Contact = () => {
     message: ''
   });
   const [mobileError, setMobileError] = useState('');
+
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = (event) => {
+      const newLanguage = event.detail.language;
+      setCurrentLanguage(newLanguage);
+      setCountryCodes(getCountryCodes(newLanguage));
+    };
+
+    // Get initial language from URL or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    const langFromStorage = localStorage.getItem('language');
+    
+    if (langFromUrl && (langFromUrl === 'EN' || langFromUrl === 'AR')) {
+      setCurrentLanguage(langFromUrl);
+      setCountryCodes(getCountryCodes(langFromUrl));
+    } else if (langFromStorage && (langFromStorage === 'EN' || langFromStorage === 'AR')) {
+      setCurrentLanguage(langFromStorage);
+      setCountryCodes(getCountryCodes(langFromStorage));
+    }
+
+    window.addEventListener('languageChanged', handleLanguageChange);
+    return () => window.removeEventListener('languageChanged', handleLanguageChange);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -140,15 +135,19 @@ const Contact = () => {
           <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
         </svg>
       </div>
-      <div id="contact" className="contact-us section">
+      <div id="contact" className={`contact-us section ${currentLanguage === 'AR' ? 'rtl-contact' : ''}`}>
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                <h6>Contact Us</h6>
-                <h4>Connect with us today to explore your needs and discover how we can <em>support you</em></h4>
+                <h6>{getTranslation('contactTitle', currentLanguage)}</h6>
+                <h4 
+                  dangerouslySetInnerHTML={{
+                    __html: getTranslation('contactDescription', currentLanguage)
+                  }}
+                />
                 <div className="line-dec"></div>
-                <p>Ready to start your next project? Get in touch with our team and let's discuss how we can bring your vision to life.</p>
+                <p>{getTranslation('contactSubDescription', currentLanguage)}</p>
               </div>
             </div>
           </div>
@@ -182,7 +181,17 @@ const Contact = () => {
                           <div className="info-post">
                             <div className="icon">
                               <img src="assets/images/phone-icon.png" alt="Phone Icon" />
-                              <a href="tel:+963993887774">+963 993 887 774</a>
+                              <a 
+                                href="tel:+963993887774" 
+                                style={{
+                                  direction: 'ltr',
+                                  textAlign: 'left',
+                                  unicodeBidi: 'plaintext',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                +963 993 887 774
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -190,35 +199,45 @@ const Contact = () => {
                           <div className="info-post">
                             <div className="icon">
                               <img src="assets/images/ml.png" alt="Email Icon" />
-                              <a href="mailto:elyptek@gmail.com">elyptek@gmail.com</a>
+                              <a 
+                                href="mailto:elyptek@gmail.com" 
+                                style={{
+                                  direction: 'ltr',
+                                  textAlign: 'left',
+                                  unicodeBidi: 'plaintext',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                elyptek@gmail.com
+                              </a>
                             </div>
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <fieldset>
-                            <input 
-                              type="text" 
-                              name="name" 
-                              id="name" 
-                              placeholder="Your Name" 
-                              value={formData.name}
-                              onChange={handleInputChange}
-                              autoComplete="name" 
-                              required 
-                            />
-                          </fieldset>
-                          <fieldset>
-                            <input 
-                              type="email" 
-                              name="email" 
-                              id="email" 
-                              placeholder="Your Email" 
-                              value={formData.email}
-                              onChange={handleInputChange}
-                              autoComplete="email" 
-                              required 
-                            />
-                          </fieldset>
+                                                      <fieldset>
+                              <input 
+                                type="text" 
+                                name="name" 
+                                id="name" 
+                                placeholder={getTranslation('name', currentLanguage)} 
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                autoComplete="name" 
+                                required 
+                              />
+                            </fieldset>
+                            <fieldset>
+                              <input 
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                placeholder={getTranslation('email', currentLanguage)} 
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                autoComplete="email" 
+                                required 
+                              />
+                            </fieldset>
                           <fieldset>
                             <div className="mobile-input-group">
                               <select
@@ -234,7 +253,7 @@ const Contact = () => {
                                 type="tel"
                                 name="mobile"
                                 id="mobile"
-                                placeholder="Mobile Number"
+                                placeholder={getTranslation('mobile', currentLanguage)}
                                 value={formData.mobile}
                                 onChange={handleInputChange}
                                 autoComplete="tel"
@@ -250,7 +269,7 @@ const Contact = () => {
                               name="message" 
                               className="form-control" 
                               id="message" 
-                              placeholder="Your Message" 
+                              placeholder={getTranslation('message', currentLanguage)} 
                               value={formData.message}
                               onChange={handleInputChange}
                               rows="5"
@@ -259,15 +278,29 @@ const Contact = () => {
                           </fieldset>
                         </div>
                         <div className="col-lg-12">
-                          <fieldset>
+                          <fieldset style={{
+                            textAlign: 'center',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%'
+                          }}>
                             <button 
                               type="submit" 
                               id="form-submit" 
                               className="main-button"
                               disabled={isSubmitting}
+                              style={{
+                                textAlign: 'center',
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                                display: 'block',
+                                direction: 'ltr',
+                                unicodeBidi: 'plaintext'
+                              }}
                             >
                               <i className={`fa ${isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
-                              {isSubmitting ? 'Sending...' : 'Send Message Now'}
+                              {isSubmitting ? getTranslation('sending', currentLanguage) : getTranslation('sendMessage', currentLanguage)}
                             </button>
                             {submitMessage && (
                               <div className={`submit-message ${submitMessage.includes('successfully') ? 'success' : 'error'}`}>

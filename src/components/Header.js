@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getTranslation } from '../translations';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,6 +8,42 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [currentLanguage, setCurrentLanguage] = useState('EN');
   const [activeSection, setActiveSection] = useState('top');
+
+  // Initialize language from URL or localStorage
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    const langFromStorage = localStorage.getItem('language');
+    
+    let initialLang = 'EN';
+    if (langFromUrl && (langFromUrl === 'EN' || langFromUrl === 'AR')) {
+      initialLang = langFromUrl;
+      localStorage.setItem('language', langFromUrl);
+    } else if (langFromStorage && (langFromStorage === 'EN' || langFromStorage === 'AR')) {
+      initialLang = langFromStorage;
+    }
+    
+    setCurrentLanguage(initialLang);
+    
+    // Don't set RTL direction on document element to keep header/footer in LTR
+    // RTL styling will be applied through CSS classes on specific components
+  }, []);
+
+  const changeLanguage = (lang) => {
+    setCurrentLanguage(lang);
+    localStorage.setItem('language', lang);
+    
+    // Don't set RTL direction on document element to keep header/footer in LTR
+    // RTL styling will be applied through CSS classes on specific components
+    
+    // Update URL without reloading the page
+    const url = new URL(window.location);
+    url.searchParams.set('lang', lang);
+    window.history.pushState({}, '', url);
+    
+    // Trigger a custom event to notify other components
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,13 +168,13 @@ const Header = () => {
               <div className="language-toggle">
                 <button 
                   className={`lang-btn ${currentLanguage === 'EN' ? 'active' : ''}`}
-                  onClick={() => setCurrentLanguage('EN')}
+                  onClick={() => changeLanguage('EN')}
                 >
                   EN
                 </button>
                 <button 
                   className={`lang-btn ${currentLanguage === 'AR' ? 'active' : ''}`}
-                  onClick={() => setCurrentLanguage('AR')}
+                  onClick={() => changeLanguage('AR')}
                 >
                   AR
                 </button>
@@ -152,7 +189,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#top')}
                   >
                     <i className="fa fa-home"></i>
-                    Home
+                    {getTranslation('home', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section">
@@ -162,7 +199,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#services')}
                   >
                     <i className="fa fa-cogs"></i>
-                    Services
+                    {getTranslation('services', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section">
@@ -172,7 +209,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#about')}
                   >
                     <i className="fa fa-info-circle"></i>
-                    About
+                    {getTranslation('about', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section">
@@ -182,7 +219,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#team')}
                   >
                     <i className="fa fa-users"></i>
-                    Team
+                    {getTranslation('team', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section">
@@ -192,7 +229,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#portfolio')}
                   >
                     <i className="fas fa-project-diagram"></i>
-                    Projects
+                    {getTranslation('projects', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section">
@@ -202,7 +239,7 @@ const Header = () => {
                     onClick={(e) => smoothScrollToSection(e, '#contact')}
                   >
                     <i className="fa fa-envelope"></i>
-                    Contact
+                    {getTranslation('contact', currentLanguage)}
                   </a>
                 </li>
                 <li className="scroll-to-section desktop-hidden">

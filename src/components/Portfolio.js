@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { getTranslation } from '../translations';
 
 const Portfolio = () => {
+  const [currentLanguage, setCurrentLanguage] = useState('EN');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -13,7 +15,7 @@ const Portfolio = () => {
     {
       id: 1,
       title: "Damascus Gin",
-      category: "Premium Craft Gin Distillery",
+      category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
       image: "/assets/images/damascusgin.png",
       instagram: "https://www.instagram.com/damascusgin/",
       facebook: "https://www.facebook.com/damascusgin",
@@ -22,7 +24,7 @@ const Portfolio = () => {
     {
       id: 2,
       title: "Tembix",
-      category: "Composite Decking & Flooring Solutions",
+      category: currentLanguage === 'AR' ? "حلول الأرضيات والترصيع المركبة" : "Composite Decking & Flooring Solutions",
       image: "/assets/images/Tembix.png",
       instagram: "https://www.instagram.com/tembix/",
       facebook: "https://www.facebook.com/tembix",
@@ -31,7 +33,7 @@ const Portfolio = () => {
     {
       id: 3,
       title: "Sabco",
-      category: "Polystyrene & Thermal Insulation",
+      category: currentLanguage === 'AR' ? "البوليسترين والعزل الحراري" : "Polystyrene & Thermal Insulation",
       image: "/assets/images/Sabco.png",
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
@@ -49,6 +51,27 @@ const Portfolio = () => {
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = (event) => {
+      setCurrentLanguage(event.detail.language);
+    };
+
+    // Get initial language from URL or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    const langFromStorage = localStorage.getItem('language');
+    
+    if (langFromUrl && (langFromUrl === 'EN' || langFromUrl === 'AR')) {
+      setCurrentLanguage(langFromUrl);
+    } else if (langFromStorage && (langFromStorage === 'EN' || langFromStorage === 'AR')) {
+      setCurrentLanguage(langFromStorage);
+    }
+
+    window.addEventListener('languageChanged', handleLanguageChange);
+    return () => window.removeEventListener('languageChanged', handleLanguageChange);
   }, []);
 
   const totalItems = portfolioItems.length;
@@ -269,16 +292,26 @@ const Portfolio = () => {
           <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
         </svg>
       </div>
-    <div id="portfolio" className="our-portfolio">
+    <div id="portfolio" className={`our-portfolio ${currentLanguage === 'AR' ? 'rtl-portfolio' : ''}`}>
     
       <div className="container-fluid">
     
         <div className="row">
           <div className="col-lg-12">
             <div className="section-heading">
-              <h6>Our Portfolio</h6>
-              <h4>Check Out Some of Our Recent Work</h4>
-              <p>Discover our latest projects showcasing innovative design and development solutions across various industries.</p>
+              <h6>{getTranslation('portfolioTitle', currentLanguage)}</h6>
+              <h4>
+                {currentLanguage === 'AR' 
+                  ? 'اطلع على بعض أعمالنا الحديثة'
+                  : 'Check Out Some of Our Recent Work'
+                }
+              </h4>
+              <p>
+                {currentLanguage === 'AR'
+                  ? 'اكتشف أحدث مشاريعنا التي تعرض حلول التصميم والتطوير المبتكرة عبر مختلف الصناعات.'
+                  : 'Discover our latest projects showcasing innovative design and development solutions across various industries.'
+                }
+              </p>
             </div>
           </div>
         </div>
