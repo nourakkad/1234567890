@@ -132,9 +132,9 @@ const Portfolio = () => {
   const renderPortfolioItem = (item) => (
     <div className="portfolio-item-wrapper">
       <div className="portfolio-item" style={{ 
-        height: '400px', 
-        width: '100%',
-        maxWidth: '320px',
+        height: isMobile ? '500px' : '350px', 
+        width: isMobile ? '100%' : '320px',
+        maxWidth: isMobile ? '100%' : '320px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -144,17 +144,21 @@ const Portfolio = () => {
         boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
         overflow: 'hidden',
         margin: '0 auto',
-        transition: 'all 0.3s ease'
+        transition: 'all 0.3s ease',
+        minHeight: isMobile ? '500px' : '350px',
+        flexShrink: 0
       }}>
         <div className="thumb" style={{ 
-          height: '250px', 
-          width: '100%',
+          height: isMobile ? '350px' : '200px', 
+          width: isMobile ? '100%' : '320px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
           position: 'relative',
-          padding: '20px'
+          padding: isMobile ? '20px' : '20px',
+          backgroundColor: '#fff',
+          flexShrink: 0
         }}>
           <img 
             src={item.image} 
@@ -166,18 +170,18 @@ const Portfolio = () => {
               objectPosition: 'center',
               backgroundColor: '#fff',
               borderRadius: '18px 18px 0 0',
-              display: 'block'
+              display: 'block',
+              minHeight: '0',
+              maxHeight: 'none',
+              maxWidth: '100%',
+              padding: '10px'
             }}
           />
-          <div className="portfolio-overlay">
-            <div className="overlay-content">
-              <i className="fa fa-eye"></i>
-            </div>
-          </div>
+
         </div>
         <div className="down-content" style={{
           width: '100%',
-          padding: '18px 12px 16px 12px',
+          padding: isMobile ? '15px 12px 12px 12px' : '18px 12px 16px 12px',
           textAlign: 'center',
           flex: '1',
           display: 'flex',
@@ -185,27 +189,35 @@ const Portfolio = () => {
           justifyContent: 'space-between'
         }}>
           <div>
-            <h4 style={{ fontSize: '20px', fontWeight: '700', color: '#2a2a2a', marginBottom: '8px' }}>{item.title}</h4>
-            <span style={{ fontSize: '15px', color: '#afafaf' }}>{item.category}</span>
+            <h4 style={{ 
+              fontSize: isMobile ? '18px' : '20px', 
+              fontWeight: '700', 
+              color: '#2a2a2a', 
+              marginBottom: '8px' 
+            }}>{item.title}</h4>
+            <span style={{ 
+              fontSize: isMobile ? '14px' : '15px', 
+              color: '#afafaf' 
+            }}>{item.category}</span>
           </div>
           <div className="portfolio-social-buttons" style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '15px',
-            marginTop: '20px',
+            gap: isMobile ? '12px' : '15px',
+            marginTop: isMobile ? '15px' : '20px',
             padding: '0 20px'
           }}>
             <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn" style={{
-              width: '40px',
-              height: '40px',
+              width: isMobile ? '35px' : '40px',
+              height: isMobile ? '35px' : '40px',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               textDecoration: 'none',
               transition: 'all 0.3s ease',
-              fontSize: '16px',
+              fontSize: isMobile ? '14px' : '16px',
               color: '#fff',
               border: '2px solid transparent',
               background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
@@ -213,15 +225,15 @@ const Portfolio = () => {
               <i className="fab fa-instagram"></i>
             </a>
             <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn" style={{
-              width: '40px',
-              height: '40px',
+              width: isMobile ? '35px' : '40px',
+              height: isMobile ? '35px' : '40px',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               textDecoration: 'none',
               transition: 'all 0.3s ease',
-              fontSize: '16px',
+              fontSize: isMobile ? '14px' : '16px',
               color: '#fff',
               border: '2px solid transparent',
               background: '#1877f2'
@@ -229,15 +241,15 @@ const Portfolio = () => {
               <i className="fab fa-facebook"></i>
             </a>
             <a href={item.website} target="_blank" rel="noopener noreferrer" className="social-btn website-btn" style={{
-              width: '40px',
-              height: '40px',
+              width: isMobile ? '35px' : '40px',
+              height: isMobile ? '35px' : '40px',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               textDecoration: 'none',
               transition: 'all 0.3s ease',
-              fontSize: '16px',
+              fontSize: isMobile ? '14px' : '16px',
               color: '#fff',
               border: '2px solid transparent',
               background: '#ffa700'

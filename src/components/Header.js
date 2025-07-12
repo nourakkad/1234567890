@@ -111,6 +111,12 @@ const Header = () => {
                 className={`menu-trigger ${isMenuOpen ? 'active' : ''}`}
                 onClick={toggleMenu}
                 aria-label="Open menu"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  boxShadow: 'none'
+                }}
               >
                 <span>Menu</span>
               </button>
