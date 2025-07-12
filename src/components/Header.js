@@ -1,12 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { getTranslation } from '../translations';
 
+function isDeviceArabic() {
+  const lang = navigator.language || (navigator.languages && navigator.languages[0]);
+  return lang && lang.toLowerCase().startsWith('ar');
+}
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [currentLanguage, setCurrentLanguage] = useState('EN');
+  const [currentLanguage, setCurrentLanguage] = useState(() => {
+    // 1. Check URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    if (langFromUrl && (langFromUrl === 'EN' || langFromUrl === 'AR')) {
+      return langFromUrl;
+    }
+    // 2. Check localStorage
+    const langFromStorage = localStorage.getItem('language');
+    if (langFromStorage && (langFromStorage === 'EN' || langFromStorage === 'AR')) {
+      return langFromStorage;
+    }
+    // 3. Check device/browser language
+    if (isDeviceArabic()) {
+      return 'AR';
+    }
+    // 4. Default to English
+    return 'EN';
+  });
   const [activeSection, setActiveSection] = useState('top');
 
   // Initialize language from URL or localStorage
