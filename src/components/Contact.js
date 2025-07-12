@@ -2,16 +2,36 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
 const countryCodes = [
-  { code: '+963', label: '🇸🇾' },
-  { code: '+20', label: '🇪🇬' },
-  { code: '+966', label: '🇸🇦 Saudi Arabia' },
-  { code: '+971', label: '🇦🇪 UAE' },
-  { code: '+1', label: '🇺🇸 USA/Canada' },
-  { code: '+44', label: '🇬🇧 UK' },
-  { code: '+90', label: '🇹🇷 Turkey' },
-  { code: '+962', label: '🇯🇴 Jordan' },
-  { code: '+961', label: '🇱🇧 Lebanon' },
-  // ...add more as needed
+  { code: '+1', label: 'USA/Canada' },
+  { code: '+44', label: 'United Kingdom' },
+  { code: '+49', label: 'Germany' },
+  { code: '+33', label: 'France' },
+  { code: '+39', label: 'Italy' },
+  { code: '+34', label: 'Spain' },
+  { code: '+7', label: 'Russia' },
+  { code: '+81', label: 'Japan' },
+  { code: '+86', label: 'China' },
+  { code: '+91', label: 'India' },
+  { code: '+61', label: 'Australia' },
+  { code: '+64', label: 'New Zealand' },
+  { code: '+55', label: 'Brazil' },
+  { code: '+52', label: 'Mexico' },
+  { code: '+27', label: 'South Africa' },
+  { code: '+20', label: 'Egypt' },
+  { code: '+971', label: 'UAE' },
+  { code: '+966', label: 'Saudi Arabia' },
+  { code: '+90', label: 'Turkey' },
+  { code: '+963', label: 'Syria' },
+  { code: '+962', label: 'Jordan' },
+  { code: '+961', label: 'Lebanon' },
+  { code: '+965', label: 'Kuwait' },
+  { code: '+974', label: 'Qatar' },
+  { code: '+968', label: 'Oman' },
+  { code: '+973', label: 'Bahrain' },
+  { code: '+82', label: 'South Korea' },  
+  { code: '+60', label: 'Malaysia' },
+  { code: '+65', label: 'Singapore' },
+  { code: '+66', label: 'Thailand' },
 ];
 
 const Contact = () => {
@@ -144,7 +164,7 @@ const Contact = () => {
                   <div className="col-lg-5">
                     <div id="map">
                       <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d831.5741400332205!2d36.28975546389358!3d33.519674403674784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDMxJzEwLjkiTiAzNsKwMTcnMjEuOCJF!5e0!3m2!1sar!2snl!4v1750945629741!5m2!1sar!2snl" 
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=33.519628,36.289302&language=en&zoom=18" 
                         width="100%" 
                         height="450" 
                         style={{border:0}} 
