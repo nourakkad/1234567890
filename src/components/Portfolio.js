@@ -31,7 +31,7 @@ const Portfolio = () => {
     {
       id: 3,
       title: "Sabco",
-      category: "Polystyrene Manufacturing & Thermal Insulation",
+      category: "Polystyrene & Thermal Insulation",
       image: "/assets/images/Sabco.png",
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
