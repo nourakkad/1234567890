@@ -51,16 +51,52 @@
   }
 }
 
-/* Desktop Arabic right alignment */
-@media (min-width: 769px) {
-  .rtl-about .about-heading {
-    text-align: right !important;
+
+
+/* Mobile centering for Contact section */
+@media (max-width: 768px) {
+  .contact-heading {
+    text-align: center !important;
   }
-  .rtl-about .about-subtitle {
-    text-align: right !important;
+  .contact-subtitle {
+    text-align: center !important;
   }
-  .rtl-about .about-line {
+  .contact-title {
+    text-align: center !important;
+  }
+  .contact-line {
     margin-left: auto !important;
-    margin-right: 0 !important;
+    margin-right: auto !important;
+  }
+  .contact-description {
+    text-align: center !important;
+  }
+  .fill-form {
+    text-align: center !important;
+  }
+  .fill-form .row {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .fill-form .col-lg-6 {
+    text-align: center !important;
+  }
+  .fill-form .info-post {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .fill-form .icon {
+    justify-content: center !important;
+  }
+  .fill-form fieldset {
+    text-align: center !important;
+  }
+  .fill-form input,
+  .fill-form textarea,
+  .fill-form select {
+    text-align: center !important;
+  }
+  .fill-form .mobile-input-group {
+    justify-content: center !important;
   }
 }

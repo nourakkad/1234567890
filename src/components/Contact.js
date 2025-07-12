@@ -135,19 +135,20 @@ const Contact = () => {
           <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
         </svg>
       </div>
-      <div id="contact" className={`contact-us section ${currentLanguage === 'AR' ? 'rtl-contact' : ''}`}>
+      <div id="contact" className="contact-us section">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
-              <div className="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                <h6>{getTranslation('contactTitle', currentLanguage)}</h6>
+              <div className="section-heading wow fadeIn contact-heading" data-wow-duration="1s" data-wow-delay="0.5s">
+                <h6 className="contact-subtitle">{getTranslation('contactTitle', currentLanguage)}</h6>
                 <h4 
+                  className="contact-title"
                   dangerouslySetInnerHTML={{
                     __html: getTranslation('contactDescription', currentLanguage)
                   }}
                 />
-                <div className="line-dec"></div>
-                <p>{getTranslation('contactSubDescription', currentLanguage)}</p>
+                <div className="line-dec contact-line"></div>
+                <p className="contact-description">{getTranslation('contactSubDescription', currentLanguage)}</p>
               </div>
             </div>
           </div>
@@ -175,29 +176,16 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="col-lg-7">
-                    <div className="fill-form" style={{
-                      textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                    }}>
-                      <div className="row" style={{
-                        justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start',
-                        alignItems: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                      }}>
-                        <div className="col-lg-6" style={{
-                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                        }}>
-                          <div className="info-post" style={{
-                            textAlign: window.innerWidth <= 767 ? 'center' : 'left',
-                            justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                          }}>
-                            <div className="icon" style={{
-                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                            }}>
+                    <div className="fill-form">
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="info-post">
+                            <div className="icon">
                               <img src="assets/images/phone-icon.png" alt="Phone Icon" />
                               <a 
                                 href="tel:+963993887774" 
                                 style={{
                                   direction: 'ltr',
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left',
                                   unicodeBidi: 'plaintext',
                                   display: 'inline-block'
                                 }}
@@ -207,22 +195,14 @@ const Contact = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg-6" style={{
-                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                        }}>
-                          <div className="info-post" style={{
-                            textAlign: window.innerWidth <= 767 ? 'center' : 'left',
-                            justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                          }}>
-                            <div className="icon" style={{
-                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                            }}>
+                        <div className="col-lg-6">
+                          <div className="info-post">
+                            <div className="icon">
                               <img src="assets/images/ml.png" alt="Email Icon" />
                               <a 
                                 href="mailto:elyptek@gmail.com" 
                                 style={{
                                   direction: 'ltr',
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left',
                                   unicodeBidi: 'plaintext',
                                   display: 'inline-block'
                                 }}
@@ -232,12 +212,8 @@ const Contact = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg-6" style={{
-                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                        }}>
-                          <fieldset style={{
-                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                          }}>
+                        <div className="col-lg-6">
+                          <fieldset>
                               <input 
                                 type="text" 
                                 name="name" 
@@ -247,14 +223,9 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="name" 
                                 required 
-                                style={{
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                                }}
                               />
                             </fieldset>
-                            <fieldset style={{
-                              textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                            }}>
+                            <fieldset>
                               <input 
                                 type="email" 
                                 name="email" 
@@ -264,24 +235,14 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="email" 
                                 required 
-                                style={{
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                                }}
                               />
                             </fieldset>
-                          <fieldset style={{
-                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                          }}>
-                            <div className="mobile-input-group" style={{
-                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
-                            }}>
+                          <fieldset>
+                            <div className="mobile-input-group">
                               <select
                                 name="countryCode"
                                 value={formData.countryCode}
                                 onChange={handleInputChange}
-                                style={{
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                                }}
                               >
                                 {countryCodes.map(c => (
                                   <option key={c.code} value={c.code}>{c.label} {c.code}</option>
@@ -296,20 +257,13 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="tel"
                                 required
-                                style={{
-                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                                }}
                               />
                             </div>
                             {mobileError && <div className="form-error">{mobileError}</div>}
                           </fieldset>
                         </div>
-                        <div className="col-lg-6" style={{
-                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                        }}>
-                          <fieldset style={{
-                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                          }}>
+                        <div className="col-lg-6">
+                          <fieldset>
                             <textarea 
                               name="message" 
                               className="form-control" 
@@ -319,30 +273,17 @@ const Contact = () => {
                               onChange={handleInputChange}
                               rows="5"
                               required
-                              style={{
-                                textAlign: window.innerWidth <= 767 ? 'center' : 'left'
-                              }}
                             ></textarea>
                           </fieldset>
                         </div>
                         <div className="col-lg-12">
-                          <fieldset style={{
-                            textAlign: 'center',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: '100%'
-                          }}>
+                          <fieldset>
                             <button 
                               type="submit" 
                               id="form-submit" 
                               className="main-button"
                               disabled={isSubmitting}
                               style={{
-                                textAlign: 'center',
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
-                                display: 'block',
                                 direction: 'ltr',
                                 unicodeBidi: 'plaintext'
                               }}
