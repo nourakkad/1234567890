@@ -46,8 +46,10 @@ const About = () => {
                     textAlign: currentLanguage === 'AR' ? 'center' : 'left'
                   }}>
                     <h6 style={{
-                      textAlign: currentLanguage === 'AR' ? 'center' : 'left'
-                    }}>{getTranslation('aboutTitle', currentLanguage)}</h6>
+                      textAlign: currentLanguage === 'AR' ? 'right' : 'left'
+                    }} 
+                    className="about-subtitle"
+                    >{getTranslation('aboutTitle', currentLanguage)}</h6>
                     <h4 
                       dangerouslySetInnerHTML={{
                         __html: currentLanguage === 'AR' 
@@ -55,12 +57,16 @@ const About = () => {
                           : 'Who is Elyp<em>tek</em>'
                       }}
                       style={{
-                        textAlign: currentLanguage === 'AR' ? 'center' : 'left'
+                        textAlign: currentLanguage === 'AR' ? 'right' : 'left',
+                        '@media (max-width: 768px)': {
+                          textAlign: 'center'
+                        }
                       }}
+                      className="about-heading"
                     />
-                    <div className="line-dec" style={{
+                    <div className="line-dec about-line" style={{
                       marginLeft: currentLanguage === 'AR' ? 'auto' : '0',
-                      marginRight: currentLanguage === 'AR' ? 'auto' : '0'
+                      marginRight: currentLanguage === 'AR' ? '0' : '0'
                     }}></div>
                   </div>
                   <p>

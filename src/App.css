@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+/* Mobile centering for About section heading */
+@media (max-width: 768px) {
+  .about-heading {
+    text-align: center !important;
+  }
+  .about-subtitle {
+    text-align: center !important;
+  }
+  .about-line {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Desktop Arabic right alignment */
+@media (min-width: 769px) {
+  .rtl-about .about-heading {
+    text-align: right !important;
+  }
+  .rtl-about .about-subtitle {
+    text-align: right !important;
+  }
+  .rtl-about .about-line {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+}
