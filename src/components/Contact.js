@@ -175,17 +175,29 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="col-lg-7">
-                    <div className="fill-form">
-                      <div className="row">
-                        <div className="col-lg-6">
-                          <div className="info-post">
-                            <div className="icon">
+                    <div className="fill-form" style={{
+                      textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                    }}>
+                      <div className="row" style={{
+                        justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start',
+                        alignItems: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                      }}>
+                        <div className="col-lg-6" style={{
+                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                        }}>
+                          <div className="info-post" style={{
+                            textAlign: window.innerWidth <= 767 ? 'center' : 'left',
+                            justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                          }}>
+                            <div className="icon" style={{
+                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                            }}>
                               <img src="assets/images/phone-icon.png" alt="Phone Icon" />
                               <a 
                                 href="tel:+963993887774" 
                                 style={{
                                   direction: 'ltr',
-                                  textAlign: 'left',
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left',
                                   unicodeBidi: 'plaintext',
                                   display: 'inline-block'
                                 }}
@@ -195,15 +207,22 @@ const Contact = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg-6">
-                          <div className="info-post">
-                            <div className="icon">
+                        <div className="col-lg-6" style={{
+                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                        }}>
+                          <div className="info-post" style={{
+                            textAlign: window.innerWidth <= 767 ? 'center' : 'left',
+                            justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                          }}>
+                            <div className="icon" style={{
+                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                            }}>
                               <img src="assets/images/ml.png" alt="Email Icon" />
                               <a 
                                 href="mailto:elyptek@gmail.com" 
                                 style={{
                                   direction: 'ltr',
-                                  textAlign: 'left',
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left',
                                   unicodeBidi: 'plaintext',
                                   display: 'inline-block'
                                 }}
@@ -213,8 +232,12 @@ const Contact = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg-6">
-                                                      <fieldset>
+                        <div className="col-lg-6" style={{
+                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                        }}>
+                          <fieldset style={{
+                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                          }}>
                               <input 
                                 type="text" 
                                 name="name" 
@@ -224,9 +247,14 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="name" 
                                 required 
+                                style={{
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                                }}
                               />
                             </fieldset>
-                            <fieldset>
+                            <fieldset style={{
+                              textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                            }}>
                               <input 
                                 type="email" 
                                 name="email" 
@@ -236,14 +264,24 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="email" 
                                 required 
+                                style={{
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                                }}
                               />
                             </fieldset>
-                          <fieldset>
-                            <div className="mobile-input-group">
+                          <fieldset style={{
+                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                          }}>
+                            <div className="mobile-input-group" style={{
+                              justifyContent: window.innerWidth <= 767 ? 'center' : 'flex-start'
+                            }}>
                               <select
                                 name="countryCode"
                                 value={formData.countryCode}
                                 onChange={handleInputChange}
+                                style={{
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                                }}
                               >
                                 {countryCodes.map(c => (
                                   <option key={c.code} value={c.code}>{c.label} {c.code}</option>
@@ -258,13 +296,20 @@ const Contact = () => {
                                 onChange={handleInputChange}
                                 autoComplete="tel"
                                 required
+                                style={{
+                                  textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                                }}
                               />
                             </div>
                             {mobileError && <div className="form-error">{mobileError}</div>}
                           </fieldset>
                         </div>
-                        <div className="col-lg-6">
-                          <fieldset>
+                        <div className="col-lg-6" style={{
+                          textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                        }}>
+                          <fieldset style={{
+                            textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                          }}>
                             <textarea 
                               name="message" 
                               className="form-control" 
@@ -274,6 +319,9 @@ const Contact = () => {
                               onChange={handleInputChange}
                               rows="5"
                               required
+                              style={{
+                                textAlign: window.innerWidth <= 767 ? 'center' : 'left'
+                              }}
                             ></textarea>
                           </fieldset>
                         </div>

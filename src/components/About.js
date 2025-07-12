@@ -42,16 +42,26 @@ const About = () => {
               </div>
               <div className="col-lg-6 align-self-center wow fadeInRight order-lg-2 order-1" data-wow-duration="1s" data-wow-delay="0.5s">
                 <div className="about-right-content">
-                  <div className="section-heading">
-                    <h6>{getTranslation('aboutTitle', currentLanguage)}</h6>
+                  <div className="section-heading" style={{
+                    textAlign: currentLanguage === 'AR' ? 'center' : 'left'
+                  }}>
+                    <h6 style={{
+                      textAlign: currentLanguage === 'AR' ? 'center' : 'left'
+                    }}>{getTranslation('aboutTitle', currentLanguage)}</h6>
                     <h4 
                       dangerouslySetInnerHTML={{
                         __html: currentLanguage === 'AR' 
                           ? 'من هو إيليب<em>تيك</em>' 
                           : 'Who is Elyp<em>tek</em>'
                       }}
+                      style={{
+                        textAlign: currentLanguage === 'AR' ? 'center' : 'left'
+                      }}
                     />
-                    <div className="line-dec"></div>
+                    <div className="line-dec" style={{
+                      marginLeft: currentLanguage === 'AR' ? 'auto' : '0',
+                      marginRight: currentLanguage === 'AR' ? 'auto' : '0'
+                    }}></div>
                   </div>
                   <p>
                     {currentLanguage === 'AR' 

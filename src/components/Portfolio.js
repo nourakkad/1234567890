@@ -292,7 +292,7 @@ const Portfolio = () => {
           <path fill="rgba(255,167,0,0.8)" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,80L1392,80C1344,80,1248,80,1152,80C1056,80,960,80,864,80C768,80,672,80,576,80C480,80,384,80,288,80C192,80,96,80,48,80L0,80Z"></path>
         </svg>
       </div>
-    <div id="portfolio" className={`our-portfolio ${currentLanguage === 'AR' ? 'rtl-portfolio' : ''}`}>
+    <div id="portfolio" className="our-portfolio">
     
       <div className="container-fluid">
     

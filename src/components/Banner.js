@@ -86,7 +86,7 @@ const Banner = () => {
                       direction: currentLanguage === 'AR' ? 'rtl' : 'ltr',
                       textAlign: currentLanguage === 'AR' ? 'right' : 'left'
                     }}>
-                      {currentLanguage === 'AR' ? 'الحلول' : 'Marketing'}
+                      {currentLanguage === 'AR' ? 'التسويق' : 'Marketing'}
                     </span>
                     <span className="custom-underline black-underline"></span>
                   </span>
@@ -102,7 +102,7 @@ const Banner = () => {
                       direction: currentLanguage === 'AR' ? 'rtl' : 'ltr',
                       textAlign: currentLanguage === 'AR' ? 'right' : 'left'
                     }}>
-                      {currentLanguage === 'AR' ? 'التسويق' : 'Software'}
+                      {currentLanguage === 'AR' ? 'الحلول' : 'Software'}
                     </span>
                     <span className="custom-underline orange-underline"></span>
                   </span>
