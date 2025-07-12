@@ -13,7 +13,7 @@ const Portfolio = () => {
     {
       id: 1,
       title: "Damascus Gin",
-      category: "Branding",
+      category: "Premium Craft Gin Distillery",
       image: "/assets/images/damascusgin.png",
       instagram: "https://www.instagram.com/damascusgin/",
       facebook: "https://www.facebook.com/damascusgin",
@@ -22,7 +22,7 @@ const Portfolio = () => {
     {
       id: 2,
       title: "Tembix",
-      category: "Web Development",
+      category: "Composite Decking & Flooring Solutions",
       image: "/assets/images/Tembix.png",
       instagram: "https://www.instagram.com/tembix/",
       facebook: "https://www.facebook.com/tembix",
@@ -31,7 +31,7 @@ const Portfolio = () => {
     {
       id: 3,
       title: "Sabco",
-      category: "Digital Marketing",
+      category: "Polystyrene Manufacturing & Thermal Insulation",
       image: "/assets/images/Sabco.png",
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
