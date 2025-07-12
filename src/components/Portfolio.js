@@ -26,7 +26,7 @@ const Portfolio = () => {
       image: "/assets/images/Tembix.png",
       instagram: "https://www.instagram.com/tembix/",
       facebook: "https://www.facebook.com/tembix",
-      website: "https://tembix.com"
+      website: "https://timbex-sy.com/"
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ const Portfolio = () => {
       image: "/assets/images/Sabco.png",
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
-      website: "https://sabco.com"
+      website: "https://sabco.com.sy/"
     }
   ];
 
