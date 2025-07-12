@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getTranslation } from '../translations';
 
 const Footer = () => {
   const [currentLanguage, setCurrentLanguage] = useState('EN');

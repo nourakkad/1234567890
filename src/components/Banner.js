@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getTranslation } from '../translations';
 
 const Banner = () => {
   const [currentLanguage, setCurrentLanguage] = useState('EN');
