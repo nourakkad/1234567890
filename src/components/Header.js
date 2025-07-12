@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getTranslation } from '../translations';
 
 function isDeviceArabic() {
+  console.log('navigator.language:', navigator.language);
+  console.log('navigator.languages:', navigator.languages);
   const lang = navigator.language || (navigator.languages && navigator.languages[0]);
   return lang && lang.toLowerCase().startsWith('ar');
 }
