@@ -51,7 +51,7 @@ const About = () => {
                     <h4 
                       dangerouslySetInnerHTML={{
                         __html: currentLanguage === 'AR' 
-                          ? 'من هو إيليب<em>تيك</em>' 
+                          ? 'من هو إيليبـ<em>تيك</em>' 
                           : 'Who is Elyp<em>tek</em>'
                       }}
                       style={{
