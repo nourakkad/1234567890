@@ -17,7 +17,7 @@ const Portfolio = () => {
       id: 1,
       title: "Tembix",
       category: currentLanguage === 'AR' ? "حلول الأرضيات والترصيع المركبة" : "Composite Decking & Flooring Solutions",
-      image: "/assets/images/Tembix.png",
+      image: "/assets/logo/Tembix.png",
       instagram: "https://www.instagram.com/tembix/",
       facebook: "https://www.facebook.com/tembix",
       website: "https://timbex-sy.com/"
@@ -26,7 +26,7 @@ const Portfolio = () => {
       id: 2,
       title: "Sabco",
       category: currentLanguage === 'AR' ? "البوليسترين والعزل الحراري" : "Polystyrene & Thermal Insulation",
-      image: "/assets/images/Sabco.png",
+      image: "/assets/logo/Sabco.png",
       instagram: "https://www.instagram.com/sabco/",
       facebook: "https://www.facebook.com/sabco",
       website: "https://sabco.com.sy/"
@@ -35,7 +35,7 @@ const Portfolio = () => {
       id: 3,
       title: "Damascus Gin",
       category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
-      image: "/assets/images/damascusgin.png",
+      image: "/assets/logo/damascusgin.png",
       instagram: "https://www.instagram.com/damascusgin/",
       facebook: "https://www.facebook.com/damascusgin",
       website: "https://damascusgin.com"
@@ -44,7 +44,7 @@ const Portfolio = () => {
       id: 4,
       title: "KMA",
       category: currentLanguage === 'AR' ? "شركة القمة لخدمات محطات الوقود" : "KMA FOR GAS STATION SERVICES",
-      image: "/assets/images/KMA.png",
+      image: "/assets/logo/KMA.png",
     
       facebook: "https://www.facebook.com/profile.php?id=61572372762233&sk",
       website: "https://kma-sy.com"
@@ -53,7 +53,7 @@ const Portfolio = () => {
       id: 5,
       title: "AGUS",
       category: currentLanguage === 'AR' ? "الجمعية العربية الألمانية لجراحي المسالك البولية" : "Arab German Urological Surgeons",
-      image: "/assets/images/AGUS.png",
+      image: "/assets/logo/AGUS.png",
       instagram: "https://www.instagram.com/geraraburology?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       facebook: "https://www.facebook.com/profile.php?id=61575541529070",
       website: "https://gaau.blog"
