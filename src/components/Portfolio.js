@@ -40,6 +40,24 @@ const Portfolio = () => {
       facebook: "https://www.facebook.com/damascusgin",
       website: "https://damascusgin.com"
     },
+    {
+      id: 4,
+      title: "KMA",
+      category: currentLanguage === 'AR' ? "شركة صناعية · محطات وقود · تجاري وصناعي" : "Industrial Company · Gas Station · Commercial & Industrial",
+      image: "/assets/images/KMA.png",
+    
+      facebook: "https://www.facebook.com/profile.php?id=61572372762233&sk",
+      website: "https://kma-sy.com"
+    },
+    {
+      id: 5,
+      title: "Damascus Gin",
+      category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
+      image: "/assets/images/damascusgin.png",
+      instagram: "https://www.instagram.com/damascusgin/",
+      facebook: "https://www.facebook.com/damascusgin",
+      website: "https://damascusgin.com"
+    },
   ];
 
   // Check if device is mobile
@@ -303,8 +321,8 @@ const Portfolio = () => {
               <h6>{getTranslation('portfolioTitle', currentLanguage)}</h6>
               <h4>
                 {currentLanguage === 'AR' 
-                  ? 'اطلع على بعض أعمالنا الحديثة'
-                  : 'Check Out Some of Our Recent Work'
+                  ? 'اطلع على بعض مشاريع عملائنا'
+                  : 'Check Out Some of Our Clients Projects'
                 }
               </h4>
               <p>
