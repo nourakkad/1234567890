@@ -43,7 +43,7 @@ const Portfolio = () => {
     {
       id: 4,
       title: "KMA",
-      category: currentLanguage === 'AR' ? "شركة صناعية · محطات وقود · تجاري وصناعي" : "Industrial Company · Gas Station · Commercial & Industrial",
+      category: currentLanguage === 'AR' ? "شركة القمة لخدمات محطات الوقود" : "KMA FOR GAS STATION SERVICES",
       image: "/assets/images/KMA.png",
     
       facebook: "https://www.facebook.com/profile.php?id=61572372762233&sk",
