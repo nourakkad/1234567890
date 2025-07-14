@@ -51,7 +51,7 @@ const Portfolio = () => {
     },
     {
       id: 5,
-      title: "AGUS",
+      title: "GAAU",
       category: currentLanguage === 'AR' ? "الجمعية العربية الألمانية لجراحي المسالك البولية" : "Arab German Urological Surgeons",
       image: "/assets/logo/AGUS.png",
       instagram: "https://www.instagram.com/geraraburology?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
@@ -206,16 +206,14 @@ const Portfolio = () => {
             src={item.image} 
             alt={item.title} 
             style={{
-              width: '100%',
-              height: '100%',
+              maxWidth: '80%',
+              maxHeight: '80%',
               objectFit: 'contain',
               objectPosition: 'center',
               backgroundColor: '#fff',
               borderRadius: '18px 18px 0 0',
               display: 'block',
-              minHeight: '0',
-              maxHeight: 'none',
-              maxWidth: '100%',
+              margin: '0 auto',
               padding: '10px'
             }}
           />
@@ -250,38 +248,42 @@ const Portfolio = () => {
             marginTop: isMobile ? '15px' : '20px',
             padding: '0 20px'
           }}>
-            <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn" style={{
-              width: isMobile ? '35px' : '40px',
-              height: isMobile ? '35px' : '40px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              transition: 'all 0.3s ease',
-              fontSize: isMobile ? '14px' : '16px',
-              color: '#fff',
-              border: '2px solid transparent',
-              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
-            }}>
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn" style={{
-              width: isMobile ? '35px' : '40px',
-              height: isMobile ? '35px' : '40px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              transition: 'all 0.3s ease',
-              fontSize: isMobile ? '14px' : '16px',
-              color: '#fff',
-              border: '2px solid transparent',
-              background: '#1877f2'
-            }}>
-              <i className="fab fa-facebook"></i>
-            </a>
+            {item.instagram && (
+              <a href={item.instagram} target="_blank" rel="noopener noreferrer" className="social-btn instagram-btn" style={{
+                width: isMobile ? '35px' : '40px',
+                height: isMobile ? '35px' : '40px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
+                fontSize: isMobile ? '14px' : '16px',
+                color: '#fff',
+                border: '2px solid transparent',
+                background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
+              }}>
+                <i className="fab fa-instagram"></i>
+              </a>
+            )}
+            {item.facebook && (
+              <a href={item.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook-btn" style={{
+                width: isMobile ? '35px' : '40px',
+                height: isMobile ? '35px' : '40px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
+                fontSize: isMobile ? '14px' : '16px',
+                color: '#fff',
+                border: '2px solid transparent',
+                background: '#1877f2'
+              }}>
+                <i className="fab fa-facebook"></i>
+              </a>
+            )}
             <a href={item.website} target="_blank" rel="noopener noreferrer" className="social-btn website-btn" style={{
               width: isMobile ? '35px' : '40px',
               height: isMobile ? '35px' : '40px',
