@@ -51,12 +51,12 @@ const Portfolio = () => {
     },
     {
       id: 5,
-      title: "Damascus Gin",
-      category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
-      image: "/assets/images/damascusgin.png",
-      instagram: "https://www.instagram.com/damascusgin/",
-      facebook: "https://www.facebook.com/damascusgin",
-      website: "https://damascusgin.com"
+      title: "AGUS",
+      category: currentLanguage === 'AR' ? "الجمعية العربية الألمانية لجراحي المسالك البولية" : "Arab German Urological Surgeons",
+      image: "/assets/images/AGUS.png",
+      instagram: "https://www.instagram.com/geraraburology?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      facebook: "https://www.facebook.com/profile.php?id=61575541529070",
+      website: "https://gaau.blog"
     },
   ];
 
