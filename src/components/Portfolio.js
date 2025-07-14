@@ -33,12 +33,12 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      title: "Damascus Gin",
-      category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
-      image: "/assets/logo/damascusgin.png",
-      instagram: "https://www.instagram.com/damascusgin/",
-      facebook: "https://www.facebook.com/damascusgin",
-      website: "https://damascusgin.com"
+      title: "GAAU",
+      category: currentLanguage === 'AR' ? "الجمعية العربية الألمانية لجراحي المسالك البولية" : "Arab German Urological Surgeons",
+      image: "/assets/logo/AGUS.png",
+      instagram: "https://www.instagram.com/geraraburology?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      facebook: "https://www.facebook.com/profile.php?id=61575541529070",
+      website: "https://gaau.blog"
     },
     {
       id: 4,
@@ -51,12 +51,12 @@ const Portfolio = () => {
     },
     {
       id: 5,
-      title: "GAAU",
-      category: currentLanguage === 'AR' ? "الجمعية العربية الألمانية لجراحي المسالك البولية" : "Arab German Urological Surgeons",
-      image: "/assets/logo/AGUS.png",
-      instagram: "https://www.instagram.com/geraraburology?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-      facebook: "https://www.facebook.com/profile.php?id=61575541529070",
-      website: "https://gaau.blog"
+      title: "Damascus Gin",
+      category: currentLanguage === 'AR' ? "مصنع جين حرفي فاخر" : "Premium Craft Gin Distillery",
+      image: "/assets/logo/damascusgin.png",
+      instagram: "https://www.instagram.com/damascusgin/",
+      facebook: "https://www.facebook.com/damascusgin",
+      website: "https://damascusgin.com"
     },
   ];
 
@@ -174,9 +174,9 @@ const Portfolio = () => {
   const renderPortfolioItem = (item) => (
     <div className="portfolio-item-wrapper">
       <div className="portfolio-item" style={{ 
-        height: isMobile ? '500px' : '350px', 
-        width: isMobile ? '100%' : '320px',
-        maxWidth: isMobile ? '100%' : '320px',
+        height: isMobile ? '500px' : '450px', 
+        width: isMobile ? '100%' : '100%',
+        maxWidth: isMobile ? '100%' : '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -187,12 +187,12 @@ const Portfolio = () => {
         overflow: 'hidden',
         margin: '0 auto',
         transition: 'all 0.3s ease',
-        minHeight: isMobile ? '500px' : '350px',
+        minHeight: isMobile ? '500px' : '500px',
         flexShrink: 0
       }}>
         <div className="thumb" style={{ 
-          height: isMobile ? '350px' : '200px', 
-          width: isMobile ? '100%' : '320px',
+          height: isMobile ? '350px' : '350px', 
+          width: isMobile ? '100%' : '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -206,8 +206,8 @@ const Portfolio = () => {
             src={item.image} 
             alt={item.title} 
             style={{
-              maxWidth: '80%',
-              maxHeight: '80%',
+              maxWidth: '100%',
+              maxHeight: '100%',
               objectFit: 'contain',
               objectPosition: 'center',
               backgroundColor: '#fff',
