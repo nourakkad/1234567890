@@ -308,31 +308,9 @@ const DrMohammedJubain = () => {
             justifyContent: 'center',
             marginTop: '16px'
           }}>
-            <button
-              onClick={() => {
-                // Generate VCF content
-                const vcfContent = `BEGIN:VCARD
-VERSION:3.0
-FN:${doctorInfo.title}
-ORG:Elyptek
-TITLE:${doctorInfo.category}
-TEL;TYPE=CELL:${doctorInfo.phone}
-EMAIL:${doctorInfo.email}
-URL:${doctorInfo.website || ''}
-NOTE:${doctorInfo.description}
-END:VCARD`;
-
-                // Create blob and download
-                const blob = new Blob([vcfContent], { type: 'text/vcard' });
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `${doctorInfo.title.replace(/\s+/g, '_')}.vcf`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(url);
-              }}
+            <a
+              href="/Dr_Mohammed_Jubain.vcf"
+              download="Dr_Mohammed_Jubain.vcf"
               style={{
                 backgroundColor: '#ffa700',
                 color: '#fff',
@@ -347,7 +325,8 @@ END:VCARD`;
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                letterSpacing: '0.5px'
+                letterSpacing: '0.5px',
+                textDecoration: 'none'
               }}
               onMouseOver={(e) => {
                 e.target.style.backgroundColor = '#e69500';
@@ -364,7 +343,7 @@ END:VCARD`;
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               {currentLanguage === 'AR' ? 'تحميل بطاقة الاتصال' : 'Download Contact Card'}
-            </button>
+            </a>
           </div>
 
           {/* Contact Info List */}
