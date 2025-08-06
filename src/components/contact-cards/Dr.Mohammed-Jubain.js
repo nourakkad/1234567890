@@ -269,7 +269,7 @@ const DrMohammedJubain = () => {
               </svg>
             </a>
             <a 
-              href={`https://wa.me/${doctorInfo.phone.replace('+', '')}`}
+              href={`https://wa.me/4915757209569`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
