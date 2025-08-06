@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import Services from './components/Services';
@@ -7,21 +8,50 @@ import Team from './components/Team';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { DrMohammedJubain } from './components/contact-cards';
 import './App.css';
 
-
-function App() {
+// Main Home Page Component
+const HomePage = () => {
   return (
-    <div className="App">
-      <Header />
+    <>
       <Banner />
       <Services />
       <About />
       <Team />
       <Portfolio />
       <Contact />
-      <Footer />
+    </>
+  );
+};
+
+// Layout Component to conditionally render Header and Footer
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const isContactCard = location.pathname.startsWith('/contact/');
+  
+  return (
+    <div className="App">
+      {!isContactCard && <Header />}
+      {children}
+      {!isContactCard && <Footer />}
     </div>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <Layout>
+        <Routes>
+          {/* Main Home Page */}
+          <Route path="/" element={<HomePage />} />
+          
+          {/* Contact Card Routes */}
+          <Route path="/contact/dr-mohammed-jubain" element={<DrMohammedJubain />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
