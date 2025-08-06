@@ -383,7 +383,8 @@ END:VCARD`;
             
            
             {/* Social Media Links */}
-            {doctorInfo.instagram && (
+            
+            {doctorInfo.linkedin && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ 
                   backgroundColor: '#ffa700', 
@@ -395,18 +396,19 @@ END:VCARD`;
                   width: '32px',
                   height: '32px'
                 }}>
-                  <i className="fab fa-instagram" style={{ fontSize: '16px', color: '#fff' }}></i>
+                  <i className="fab fa-linkedin" style={{ fontSize: '16px', color: '#fff' }}></i>
                 </span>
                 <a 
-                  href={doctorInfo.instagram} 
+                  href={doctorInfo.linkedin} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{ fontWeight: '600', color: '#cc7a00', fontSize: '13px', textDecoration: 'underline' }}
                 >
-                  @dr.jubain
+                  Dr. Mohammed Jubain
                 </a>
               </div>
             )}
+            
             
             {doctorInfo.facebook && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -433,7 +435,7 @@ END:VCARD`;
               </div>
             )}
 
-            {doctorInfo.youtube && (
+            {doctorInfo.instagram && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ 
                   backgroundColor: '#ffa700', 
@@ -445,40 +447,15 @@ END:VCARD`;
                   width: '32px',
                   height: '32px'
                 }}>
-                  <i className="fab fa-youtube" style={{ fontSize: '16px', color: '#fff' }}></i>
+                  <i className="fab fa-instagram" style={{ fontSize: '16px', color: '#fff' }}></i>
                 </span>
                 <a 
-                  href={doctorInfo.youtube} 
+                  href={doctorInfo.instagram} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{ fontWeight: '600', color: '#cc7a00', fontSize: '13px', textDecoration: 'underline' }}
                 >
-                  @Dr.MohammedJubain
-                </a>
-              </div>
-            )}
-
-            {doctorInfo.linkedin && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ 
-                  backgroundColor: '#ffa700', 
-                  padding: '8px', 
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '32px',
-                  height: '32px'
-                }}>
-                  <i className="fab fa-linkedin" style={{ fontSize: '16px', color: '#fff' }}></i>
-                </span>
-                <a 
-                  href={doctorInfo.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ fontWeight: '600', color: '#cc7a00', fontSize: '13px', textDecoration: 'underline' }}
-                >
-                  Dr. Mohammed Jubain
+                  @dr.jubain
                 </a>
               </div>
             )}
@@ -532,6 +509,32 @@ END:VCARD`;
                 </a>
               </div>
             )}
+
+            {doctorInfo.youtube && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span style={{ 
+                  backgroundColor: '#ffa700', 
+                  padding: '8px', 
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '32px',
+                  height: '32px'
+                }}>
+                  <i className="fab fa-youtube" style={{ fontSize: '16px', color: '#fff' }}></i>
+                </span>
+                <a 
+                  href={doctorInfo.youtube} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ fontWeight: '600', color: '#cc7a00', fontSize: '13px', textDecoration: 'underline' }}
+                >
+                  @Dr.MohammedJubain
+                </a>
+              </div>
+            )}
+           
           </div>
 
       
