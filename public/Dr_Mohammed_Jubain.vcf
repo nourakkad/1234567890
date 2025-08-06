@@ -3,9 +3,15 @@ VERSION:3.0
 N:Jubain;Mohammed;;Dr.;
 FN:Dr. Mohammed Jubain
 TITLE:Urological Surgeon
-ORG:AGUS
+ORG:Elyptek
 TEL;TYPE=CELL:+49 157 57209569
 EMAIL:dr.mohammedjubain@gmail.com
-URL:https://agus-aau.com
-NOTE:Instagram: dr.jubain\nFacebook: /profile.php?id=61578359005895\nYouTube: @dr.mohammedjubain\nLinkedIn: /in/dr-mohammed-jubain-255065178\nTikTok: @dr_mohammed_jubain\nSnapchat: dr.jubain
+URL:https://elyptek.com
+URL;TYPE=INSTAGRAM:https://www.instagram.com/dr.jubain?igsh=MjVmd2d4dzF2YTMw
+URL;TYPE=FACEBOOK:https://www.facebook.com/profile.php?id=61578359005895&sk=about
+URL;TYPE=YOUTUBE:https://youtube.com/@dr.mohammedjubain?si=XLvKiQugT6veKSl2
+URL;TYPE=LINKEDIN:https://www.linkedin.com/in/dr-mohammed-jubain-255065178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+URL;TYPE=TIKTOK:https://www.tiktok.com/@dr_mohammed_jubain?is_from_webapp=1&sender_device=pc
+URL;TYPE=SNAPCHAT:https://www.snapchat.com/add/dr.jubain
+NOTE:Dr. Mohammed Jubain is a highly experienced urological surgeon specializing in the diagnosis and treatment of urological diseases and advanced surgical procedures.
 END:VCARD
