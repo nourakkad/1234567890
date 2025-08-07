@@ -238,36 +238,42 @@ const DrMohammedJubain = () => {
               </svg>
             </a>
             <a 
-              href={`mailto:${doctorInfo.email}`}
-              style={{
-                backgroundColor: '#ffa700',
-                color: '#fff',
-                padding: '12px',
-                borderRadius: '50%',
-                boxShadow: '0 4px 12px rgba(255, 167, 0, 0.3)',
-                transition: 'all 0.3s ease',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '48px',
-                height: '48px'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = '#e69500';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 6px 16px rgba(255, 167, 0, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = '#ffa700';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 12px rgba(255, 167, 0, 0.3)';
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 6l-10 7L2 6" />
-              </svg>
-            </a>
+  href={`mailto:${doctorInfo.email}`}
+  style={{
+    backgroundColor: '#ffa700',
+    color: '#fff',
+    padding: '12px',
+    borderRadius: '50%',
+    boxShadow: '0 4px 12px rgba(255, 167, 0, 0.3)',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '48px',
+    height: '48px'
+  }}
+  onMouseOver={(e) => {
+    e.target.style.backgroundColor = '#e69500';
+    e.target.style.transform = 'translateY(-2px)';
+    e.target.style.boxShadow = '0 6px 16px rgba(255, 167, 0, 0.4)';
+  }}
+  onMouseOut={(e) => {
+    e.target.style.backgroundColor = '#ffa700';
+    e.target.style.transform = 'translateY(0)';
+    e.target.style.boxShadow = '0 4px 12px rgba(255, 167, 0, 0.3)';
+  }}
+>
+  {/* Modern Classic Envelope Icon */}
+  <svg xmlns="http://www.w3.org/2000/svg" 
+       viewBox="0 0 24 24" 
+       fill="currentColor" 
+       style={{ width: '20px', height: '20px' }}>
+    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 
+             2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 
+             4-8 5-8-5V6l8 5 8-5v2z"/>
+  </svg>
+</a>
+
             <a 
               href={`https://wa.me/4915757209569`}
               target="_blank"
