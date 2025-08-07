@@ -26,7 +26,7 @@ const DrMohammedJubain = () => {
 
   const doctorInfo = {
     title: currentLanguage === 'AR' ? "د. محمد جبين" : "Dr. Mohammed Jubain",
-    category: currentLanguage === 'AR' ? "جراح مسالك بولية" : "Urological Surgeon",
+    category: currentLanguage === 'AR' ? "استشاري جراحة المسالك البولية" : "Urological Consultant Surgeon",
     image: "/assets/logo/dr-mohammed-jubain.png",
     instagram: "https://www.instagram.com/dr.jubain?igsh=MjVmd2d4dzF2YTMw",
     facebook: "https://www.facebook.com/profile.php?id=61578359005895&sk=about",
