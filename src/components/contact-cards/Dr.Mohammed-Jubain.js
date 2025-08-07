@@ -195,7 +195,7 @@ const DrMohammedJubain = () => {
               marginBottom: '12px',
               textAlign: 'center'
             }}>
-              {currentLanguage === 'AR' ? 'جراح المسالك البولية' : ' Urological Surgery'}
+              {currentLanguage === 'AR' ? 'استشاري جراحة المسالك البولية' : 'Urological Consultant Surgeon'}
             </span>
           </div>
 
