@@ -29,11 +29,11 @@ const DrMohammedJubain = () => {
     category: currentLanguage === 'AR' ? "استشاري جراحة المسالك البولية" : "Urological Consultant Surgeon",
     image: "/assets/logo/dr-mohammed-jubain.jpg",
     instagram: "https://www.instagram.com/dr.jubain?igsh=MjVmd2d4dzF2YTMw",
-    facebook: "https://www.facebook.com/profile.php?id=61578359005895&sk=about",
+    facebook: "https://www.facebook.com/share/1GZPXv3HAY/?mibextid=wwXIfr",
     youtube: "https://youtube.com/@dr.mohammedjubain?si=XLvKiQugT6veKSl2",
-    tiktok: "https://www.tiktok.com/@dr_mohammed_jubain?is_from_webapp=1&sender_device=pc",
+    tiktok: "https://www.tiktok.com/@dr.jubain?_t=ZS-8ykBq4fFc5X&_r=1",
     linkedin: "https://www.linkedin.com/in/dr-mohammed-jubain-255065178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-    snapchat: "dr.jubain",
+    snapchat: "https://www.snapchat.com/add/dr.jubain?share_id=_AwIwfh69Xw&locale=en-GB",
     phone: "+49 157 57209569",
     email: "dr.mohammedjubain@gmail.com",
     description: currentLanguage === 'AR' 
@@ -485,7 +485,7 @@ const DrMohammedJubain = () => {
                   <i className="fab fa-snapchat-ghost" style={{ fontSize: '16px', color: '#fff' }}></i>
                 </span>
                 <a 
-                  href={`https://www.snapchat.com/add/${doctorInfo.snapchat}`}
+                  href={doctorInfo.snapchat}
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{ fontWeight: '600', color: '#cc7a00', fontSize: '13px', textDecoration: 'underline' }}
