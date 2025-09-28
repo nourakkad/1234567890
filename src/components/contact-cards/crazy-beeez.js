@@ -456,7 +456,7 @@ const CrazyBeeez = () => {
                 e.target.style.boxShadow = '0 4px 15px rgba(255, 167, 0, 0.3)';
               }}
             >
-              {currentLanguage === 'AR' ? 'ملئ استمارة التوظيف' : 'apply for job'}
+              {currentLanguage === 'AR' ? 'ملئ استمارة التوظيف' : 'APPLY FOR JOP'}
             </a>
           </div>
 
