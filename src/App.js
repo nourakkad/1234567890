@@ -8,7 +8,7 @@ import Team from './components/Team';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import { DrMohammedJubain } from './components/contact-cards';
+import { DrMohammedJubain, CrazyBeeez } from './components/contact-cards';
 import './App.css';
 
 // Main Home Page Component
@@ -49,6 +49,7 @@ function App() {
           
           {/* Contact Card Routes */}
           <Route path="/contact/dr-mohammed-jubain" element={<DrMohammedJubain />} />
+          <Route path="/contact/crazy-beeez" element={<CrazyBeeez />} />
         </Routes>
       </Layout>
     </Router>
