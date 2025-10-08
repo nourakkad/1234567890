@@ -458,10 +458,7 @@ const CrazyBeeez = () => {
             >
               {currentLanguage === 'AR' ? 'ملئ استمارة التوظيف' : 'APPLY FOR JOP'}
             </a>
-          </div>
-
-              
-          
+          </div>             
           </div>
 
       
